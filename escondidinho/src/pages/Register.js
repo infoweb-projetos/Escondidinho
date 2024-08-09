@@ -1,6 +1,6 @@
 import React from 'react';
 import '../assets/css/styles.css';
-import logo from '../assets/img/logo_teste.png';
+import logo from '../assets/img/logo 1.png';
 
 const Register = () => {
   return (
@@ -8,17 +8,21 @@ const Register = () => {
       <div className="logo">
         <img src={logo} alt="Logo" />
       </div>
-      <h1>Cadastro</h1>
+     {/*  <h1>Login</h1> */}
       <form>
-        <label htmlFor="email">Email</label>
-        <input type="email" id="email" name="email" required />
-        
-        <label htmlFor="password">Senha</label>
-        <input type="password" id="password" name="password" required />
-        
-        <button type="submit">Cadastrar</button>
+        <label htmlFor="nome"></label>
+        <input type="nome" id="nome" name="nome" required  placeholder='nome'/>
+        <label htmlFor="email"></label>
+        <input type="email" id="email" name="email" required  placeholder='email'/>
+        <input type="tel" id="tel" name="tel" required  placeholder='tel/cel'/>
+        <input type="password" id="password" name="password" required placeholder='senha'/>
+        <input type="password" id="password" name="password" required placeholder='Confirmar senha'/>
+       
+        <button type="submit">Registrar</button>
       </form>
-      <p>Já tem uma conta? <a href="/login">Faça login</a></p>
+      
+      
+
     </div>
   );
 };
