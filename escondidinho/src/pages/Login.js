@@ -16,8 +16,8 @@ const Login = () => {
         <input type="password" id="password" name="password" required placeholder='senha'/>
         
         <div className="remember-forgot"> 
-          <label>  <input  type="checkbox"/> Lembre de mim </label>
-          <a href="#"> Esqueceu a senha?</a>
+          <label> <input  type="checkbox"/> Lembre de mim </label>
+          <a class="forgot" href="#"> Esqueceu a senha?</a>
         </div>
         <button type="submit">Entrar</button>
       </form>
