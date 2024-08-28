@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import '../assets/css/styles.css';
 import logo from '../assets/img/logo 1.png';
 import eyeIcon from '../assets/img/eye.png';
@@ -71,10 +72,10 @@ const Login = () => {
           </label>
         </div>
         <button type="submit">Entrar</button>
-        <a className="forgot" href="#">Esqueceu a senha?</a>
+        <Link className="forgot" to="/forgot-password">Esqueceu a senha?</Link>
         {error && <p className="error">{error}</p>}
       </form>
-      <p>Não tem uma conta? <a href="/register" className='register-button'><strong>Cadastre-se</strong></a></p>
+      <p>Não tem uma conta? <Link to="/register" className='register-button'><strong>Cadastre-se</strong></Link></p>
     </div>
   );
 };
