@@ -5,6 +5,9 @@ import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
 import NotFound from './pages/NotFound';
 import EsquecerSenha from './pages/EsquecerSenha'; 
+import Email from './pages/Email'; 
+import VerificarCodigo from './pages/VerificarCodigo'; 
+import NovaSenha from './pages/NovaSenha'; 
 
 function App() {
   return (
@@ -13,7 +16,10 @@ function App() {
         <Route path="/" element={<Login />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/forgot-password" element={<EsquecerSenha />} /> 
+       {/* <Route path="/forgot-password" element={<EsquecerSenha />} /> */}
+        <Route path="/forgot-password" element={<Email />} /> 
+        <Route path="/verify-code" element={<VerificarCodigo />} />
+        <Route path="/reset-password" element={<NovaSenha />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
