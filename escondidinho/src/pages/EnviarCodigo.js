@@ -13,7 +13,7 @@ const RequestReset = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch('http://localhost:5000/request-reset', {
+      const response = await fetch('http://localhost:5000/EnviarCodigo', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email }),

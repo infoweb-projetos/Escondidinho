@@ -72,7 +72,7 @@ const Login = () => {
           </label>
         </div>
         <button type="submit">Entrar</button>
-        <Link className="forgot" to="/forgot-password">Esqueceu a senha?</Link>
+        <Link className="forgot" to="/EnviarCodigo">Esqueceu a senha?</Link>
         {error && <p className="error">{error}</p>}
       </form>
       <p>Não tem uma conta? <Link to="/register" className='register-button'><strong>Cadastre-se</strong></Link></p>
