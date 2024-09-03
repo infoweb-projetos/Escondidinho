@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';  
-import '../assets/css/styles.css';
+import '../assets/css/enviarcodigo.css';
 import logo from '../assets/img/logo 1.png';
 
 const RequestReset = () => {

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../assets/css/styles.css';
+import '../assets/css/novasenha.css';
 import logo from '../assets/img/logo 1.png';
 
 const ResetPassword = () => {
