@@ -5,7 +5,7 @@ import logo from '../assets/img/logo 1.png';
 import eyeIcon from '../assets/img/eye.png';
 import eyeSlashIcon from '../assets/img/eye-slash.png';
 
-const Register = () => {
+const Register = ({ role }) => {
   const [nome, setNome] = useState('');
   const [email, setEmail] = useState('');
   const [tel, setTel] = useState('');
@@ -26,10 +26,10 @@ const Register = () => {
     }
 
     try {
-      const response = await fetch('http://localhost:5000/register/cliente', {
+      const response = await fetch(`http://localhost:5000/register/${role}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ nomecliente: nome, email, tel, password }),
+        body: JSON.stringify({ nome, email, tel, password }),
       });
 
       if (response.ok) {

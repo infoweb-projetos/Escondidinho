@@ -5,7 +5,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const { Pool } = require('pg');
 
-//conexão com o pg
+// Conexão com o banco de dados PostgreSQL
 const pool = new Pool({
   user: 'dev',
   host: '179.190.224.178',
@@ -18,8 +18,10 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
+// Função para validar o comprimento das strings
 const validateLength = (value, maxLength) => value.length <= maxLength;
 
+// Rota para cadastro de cliente
 app.post('/register/cliente', async (req, res) => {
   const { nomecliente, email, tel, password } = req.body;
 
@@ -33,8 +35,8 @@ app.post('/register/cliente', async (req, res) => {
   try {
     const hashedPassword = await bcrypt.hash(password, 10);
     const result = await pool.query(
-      'INSERT INTO cliente (nomecliente, email, tel, senha) VALUES ($1, $2, $3, $4) RETURNING *',
-      [nomecliente, email, tel, hashedPassword]
+      'INSERT INTO cliente (nomecliente, email, tel, senha, vendedor) VALUES ($1, $2, $3, $4, $5) RETURNING *',
+      [nomecliente, email, tel, hashedPassword, false] // vendedor é false para clientes
     );
     res.status(201).json(result.rows[0]);
   } catch (err) {
@@ -43,6 +45,7 @@ app.post('/register/cliente', async (req, res) => {
   }
 });
 
+// Rota para cadastro de vendedor
 app.post('/register/vendedor', async (req, res) => {
   const { nomevendedor, email, tel, password } = req.body;
 
@@ -56,8 +59,8 @@ app.post('/register/vendedor', async (req, res) => {
   try {
     const hashedPassword = await bcrypt.hash(password, 10);
     const result = await pool.query(
-      'INSERT INTO vendedor (nomevendedor, email, tel, senha) VALUES ($1, $2, $3, $4) RETURNING *',
-      [nomevendedor, email, tel, hashedPassword]
+      'INSERT INTO vendedor (nomevendedor, email, tel, senha, vendedor) VALUES ($1, $2, $3, $4, $5) RETURNING *',
+      [nomevendedor, email, tel, hashedPassword, true] // vendedor é true para vendedores
     );
     res.status(201).json(result.rows[0]);
   } catch (err) {
@@ -66,6 +69,7 @@ app.post('/register/vendedor', async (req, res) => {
   }
 });
 
+// Rota para login
 app.post('/login', async (req, res) => {
   const { email, password } = req.body;
 
@@ -82,6 +86,7 @@ app.post('/login', async (req, res) => {
       }
     }
 
+    // Verificar se o usuário é um vendedor
     const vendedorResult = await pool.query('SELECT * FROM vendedor WHERE email = $1', [email]);
 
     if (vendedorResult.rows.length > 0) {

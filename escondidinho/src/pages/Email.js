@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';  
 import '../assets/css/styles.css';
 import logo from '../assets/img/logo 1.png';
 
@@ -6,6 +7,7 @@ const RequestReset = () => {
   const [email, setEmail] = useState('');
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
+  const navigate = useNavigate();  
 
   const handleRequestReset = async (e) => {
     e.preventDefault();

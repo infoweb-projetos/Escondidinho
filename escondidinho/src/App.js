@@ -7,7 +7,11 @@ import NotFound from './pages/NotFound';
 import EsquecerSenha from './pages/EsquecerSenha'; 
 import Email from './pages/Email'; 
 import VerificarCodigo from './pages/VerificarCodigo'; 
-import NovaSenha from './pages/NovaSenha'; 
+import NovaSenha from './pages/NovaSenha';
+import ChooseRole from './pages/ChooseRole';
+import RegisterCliente from './pages/RegisterCliente';
+import RegisterVendedor from './pages/RegisterVendedor';
+
 
 function App() {
   return (
@@ -15,8 +19,9 @@ function App() {
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-       {/* <Route path="/forgot-password" element={<EsquecerSenha />} /> */}
+        <Route path="/register" element={<ChooseRole />} /> {/* Alterando a rota para ChooseRole */}
+        <Route path="/register/cliente" element={<RegisterCliente />} />
+        <Route path="/register/vendedor" element={<RegisterVendedor />} />
         <Route path="/forgot-password" element={<Email />} /> 
         <Route path="/verify-code" element={<VerificarCodigo />} />
         <Route path="/reset-password" element={<NovaSenha />} />

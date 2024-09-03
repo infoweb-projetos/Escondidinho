@@ -76,6 +76,7 @@ const Login = () => {
         {error && <p className="error">{error}</p>}
       </form>
       <p>Não tem uma conta? <Link to="/register" className='register-button'><strong>Cadastre-se</strong></Link></p>
+
     </div>
   );
 };
