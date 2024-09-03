@@ -1,0 +1,171 @@
+body, h1, form, input, button {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font: inherit;
+    font-family: 'Arial', sans-serif;
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+    background-color: #fff;
+    background-image: url("../img/fundo.png"); /* Background image for donuts */
+    background-repeat: repeat;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+    width: 100%;
+    padding: 10px;
+    background-color: #FFE0BB;
+    position: fixed; /* Fixa o header no topo */
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    padding: 1.5em;
+}
+
+.logo {
+    
+    margin-left: 2em;
+    width: 10em;
+    
+}
+
+.site-name {
+    font-size: 24px;
+    color: #ff5f8f;
+    font-weight: bold;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    width: 100%;
+    margin-top: 15em; /* Adiciona espaço abaixo do header */
+}
+
+.form-wrapper {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    max-width: 300px;
+    width: 100%;
+    border: 2px solid #ff5f8f;
+    z-index: 1;
+}
+
+h1 {
+    font-size: 24px;
+    color: #ff5f8f;
+    margin-bottom: 20px;
+}
+
+.icon-container {
+    margin-bottom: 20px;
+}
+
+.icon {
+    width: 60px;
+    height: auto;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.input-container {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    text-align: left;
+}
+
+label {
+    font-size: 14px;
+    color: #333;
+}
+
+input[type="password"] {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ff5f8f;
+    border-radius: 25px;
+    width: 100%;
+}
+
+.submit-button {
+    padding: 12px;
+    background-color: #ff5f8f;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.submit-button:hover {
+    background-color: #e55b7f;
+}
+
+.footer {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #808080;
+    text-align: center;
+}
+
+.footer img {
+    vertical-align: middle;
+    margin-right: 5px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .form-wrapper {
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 20px;
+    }
+
+    .icon {
+        width: 50px;
+    }
+
+    .input-container label {
+        font-size: 12px;
+    }
+
+    .submit-button {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    .header {
+        padding: 15px;
+    }
+
+    .logo {
+        height: 30px;
+    }
+
+    .footer {
+        font-size: 12px;
+    }
+
+    .site-name {
+        font-size: 20px;
+    }
+}
