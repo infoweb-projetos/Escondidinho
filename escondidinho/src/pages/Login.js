@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import '../assets/css/login.css';
+import styles from '../assets/css/login.module.css'; // Importa o módulo CSS
 import logo from '../assets/img/logo 1.png';
 import eyeIcon from '../assets/img/eye.png';
 import eyeSlashIcon from '../assets/img/eye-slash.png';
@@ -35,8 +35,8 @@ const Login = () => {
   };
 
   return (
-    <div className="container">
-      <div className="logo">
+    <div className={styles.container}>
+      <div className={styles.logo}>
         <img src={logo} alt="Logo" />
       </div>
       <form onSubmit={handleLogin}>
@@ -48,8 +48,9 @@ const Login = () => {
           placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          className={styles.input} // Adicione classes específicas se necessário
         />
-        <div className="password-container">
+        <div className={styles.passwordContainer}>
           <input
             type={showPassword ? 'text' : 'password'}
             id="password"
@@ -58,25 +59,25 @@ const Login = () => {
             placeholder="Senha"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            className={styles.input} // Adicione classes específicas se necessário
           />
           <img
             src={showPassword ? eyeSlashIcon : eyeIcon}
             alt="Toggle visibility"
-            className="toggle-password"
+            className={styles.togglePassword}
             onClick={() => setShowPassword(!showPassword)}
           />
         </div>
-        <div className="remember">
+        <div className={styles.remember}>
           <label>
             <input type="checkbox" /> Lembre de mim
           </label>
         </div>
-        <button type="submit">Entrar</button>
-        <Link className="forgot" to="/EnviarCodigo">Esqueceu a senha?</Link>
-        {error && <p className="error">{error}</p>}
+        <button type="submit" className={styles.button}>Entrar</button>
+        <Link className={styles.forgot} to="/EnviarCodigo">Esqueceu a senha?</Link>
+        {error && <p className={styles.error}>{error}</p>}
       </form>
-      <p>Não tem uma conta? <Link to="/register" className='register-button'><strong>Cadastre-se</strong></Link></p>
-
+      <p>Não tem uma conta? <Link to="/register" className={styles.registerButton}><strong>Cadastre-se</strong></Link></p>
     </div>
   );
 };

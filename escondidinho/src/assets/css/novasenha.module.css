@@ -7,7 +7,13 @@ body, h1, form, input, button {
     box-sizing: border-box;
 }
 
-body {
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    width: 100%;
+    margin-top: 15em; /* Adiciona espaço abaixo do header */
     height: 100vh;
     background-color: #fff;
     background-image: url("../img/fundo.png"); /* Background image for donuts */
@@ -41,14 +47,6 @@ body {
     font-weight: bold;
 }
 
-.container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-grow: 1;
-    width: 100%;
-    margin-top: 15em; /* Adiciona espaço abaixo do header */
-}
 
 .form-wrapper {
     background-color: #fff;

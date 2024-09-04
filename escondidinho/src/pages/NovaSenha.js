@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../assets/css/novasenha.css';
+import styles from '../assets/css/novasenha.module.css'; // Importa o módulo CSS
 import logo from '../assets/img/logo.png'; // Ajuste o caminho conforme a sua estrutura de pastas
 import cadeado from '../assets/img/cadeado.png';
 import mini from '../assets/img/mini.png';
@@ -38,17 +38,17 @@ const ResetPassword = () => {
   };
 
   return (
-    <div className="container">
-      <header className="header">
-        <img src={logo} alt="Logo Escondidinho" className="logo" />
+    <div className={styles.container}>
+      <header className={styles.header}>
+        <img src={logo} alt="Logo Escondidinho" className={styles.logo} />
       </header>
-      <div className="form-wrapper">
+      <div className={styles.formWrapper}>
         <h1>Criar nova senha</h1>
-        <div className="icon-container">
-          <img src={cadeado} alt="Ícone de cadeado" className="icon" />
+        <div className={styles.iconContainer}>
+          <img src={cadeado} alt="Ícone de cadeado" className={styles.icon} />
         </div>
-        <form onSubmit={handleResetPassword} className="form">
-          <div className="input-container">
+        <form onSubmit={handleResetPassword} className={styles.form}>
+          <div className={styles.inputContainer}>
             <label htmlFor="newPassword">Nova senha:</label>
             <input
               type="password"
@@ -56,9 +56,10 @@ const ResetPassword = () => {
               placeholder="Senha"
               value={newPassword}
               onChange={(e) => setNewPassword(e.target.value)}
+              className={styles.input}
             />
           </div>
-          <div className="input-container">
+          <div className={styles.inputContainer}>
             <label htmlFor="confirmPassword">Confirmar senha:</label>
             <input
               type="password"
@@ -66,18 +67,19 @@ const ResetPassword = () => {
               placeholder="Confirmar senha"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
+              className={styles.input}
             />
           </div>
-          <button type="submit" className="submit-button">Salvar</button>
+          <button type="submit" className={styles.submitButton}>Salvar</button>
         </form>
-        <footer className="footer">
-          <p><img src={mini} alt="" /> Seus dados estão protegidos conosco!</p>
+        <footer className={styles.footer}>
+          <p><img src={mini} alt="" className={styles.miniIcon} /> Seus dados estão protegidos conosco!</p>
         </footer>
-        {error && <p className="error">{error}</p>}
-        {success && <p className="success">{success}</p>}
+        {error && <p className={styles.error}>{error}</p>}
+        {success && <p className={styles.success}>{success}</p>}
       </div>
     </div>
   );
 };
 
-export default ResetPassword
+export default ResetPassword;

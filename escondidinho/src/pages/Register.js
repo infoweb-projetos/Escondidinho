@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../assets/css/register.css';
+import styles from '../assets/css/register.module.css'; // Importa o módulo CSS
 import logo from '../assets/img/logo 1.png';
 import eyeIcon from '../assets/img/eye.png';
 import eyeSlashIcon from '../assets/img/eye-slash.png';
@@ -44,8 +44,8 @@ const Register = ({ role }) => {
   };
 
   return (
-    <div className="container">
-      <div className="logo">
+    <div className={styles.container}>
+      <div className={styles.logo}>
         <img src={logo} alt="Logo" />
       </div>
       <form onSubmit={handleRegister}>
@@ -57,6 +57,7 @@ const Register = ({ role }) => {
           placeholder="Nome"
           value={nome}
           onChange={(e) => setNome(e.target.value)}
+          className={styles.input}
         />
         <input
           type="email"
@@ -66,6 +67,7 @@ const Register = ({ role }) => {
           placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          className={styles.input}
         />
         <input
           type="tel"
@@ -75,8 +77,9 @@ const Register = ({ role }) => {
           placeholder="Tel/Cel"
           value={tel}
           onChange={(e) => setTel(e.target.value)}
+          className={styles.input}
         />
-        <div className="password-container">
+        <div className={styles.passwordContainer}>
           <input
             type={showPassword ? 'text' : 'password'}
             id="password"
@@ -85,15 +88,16 @@ const Register = ({ role }) => {
             placeholder="Senha"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            className={styles.input}
           />
           <img
             src={showPassword ? eyeSlashIcon : eyeIcon}
             alt="Toggle visibility"
-            className="toggle-password"
+            className={styles.togglePassword}
             onClick={() => setShowPassword(!showPassword)}
           />
         </div>
-        <div className="password-container">
+        <div className={styles.passwordContainer}>
           <input
             type={showConfirmPassword ? 'text' : 'password'}
             id="confirm-password"
@@ -102,18 +106,19 @@ const Register = ({ role }) => {
             placeholder="Confirmar Senha"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
+            className={styles.input}
           />
           <img
             src={showConfirmPassword ? eyeSlashIcon : eyeIcon}
             alt="Toggle visibility"
-            className="toggle-password"
+            className={styles.togglePassword}
             onClick={() => setShowConfirmPassword(!showConfirmPassword)}
           />
         </div>
-        <div className="content-below-password">
-          <button type="submit">Registrar</button>
-          {error && <p className="error">{error}</p>}
-          <p className="login-link">
+        <div className={styles.contentBelowPassword}>
+          <button type="submit" className={styles.submitButton}>Registrar</button>
+          {error && <p className={styles.error}>{error}</p>}
+          <p className={styles.loginLink}>
             Já tem uma conta? <a href="/login">Voltar para Login</a>
           </p>
         </div>
