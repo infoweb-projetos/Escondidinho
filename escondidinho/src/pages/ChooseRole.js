@@ -1,16 +1,25 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../assets/css/chooserole.css';
+import RoundedButton from './RoundedButton';
+import styles from '../assets/css/chooserole.module.css';
 
 const ChooseRole = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="choose-role-container">
-      <h2>Você é?</h2>
-      <div className="role-buttons">
-        <button onClick={() => navigate('/register/cliente')}>Cliente</button>
-        <button onClick={() => navigate('/register/vendedor')}>Vendedor</button>
+    <div className={styles.container}>
+      <div className={styles.content}>
+        <h2>Você é...?</h2>
+        <div className={styles.roleButtons}>
+          <RoundedButton 
+            text="Cliente" 
+            onClick={() => navigate('/register/cliente')} 
+          />
+          <RoundedButton 
+            text="Vendedor" 
+            onClick={() => navigate('/register/vendedor')} 
+          />
+        </div>
       </div>
     </div>
   );

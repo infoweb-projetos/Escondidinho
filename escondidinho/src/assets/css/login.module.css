@@ -1,3 +1,112 @@
-.container{
+.container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    min-height: 100vh;
+    font-family: 'Arial', sans-serif;
+    background-image: url('../img/fundo.png'); 
+    background-size: cover;
+    background-position: center;
+    padding: 0 10%;
+}
 
+.formContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+}
+
+.logo img {
+    width: 150px;
+    margin-bottom: 30px;
+}
+input {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 20px; 
+    border: 1px solid #ffcccb;
+    border-radius: 25px;
+    font-size: 16px;
+    transition: border 0.3s;
+}
+
+input:focus {
+    border-color: #ff6b6b;
+    outline: none;
+}
+
+.passwordContainer {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.togglePassword {
+    position: absolute;
+    right: 10px;
+    top: 38%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    width: 20px;
+}
+
+.remember {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.remember label {
+    display: flex;
+    align-items: center;
+}
+
+.remember input {
+    margin-right: 10px;
+}
+
+.forgot {
+    display: block;
+    text-align: center;
+    color: #ff6b6b;
+    margin-top: 30px;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.forgot:hover {
+    color: #e65a5a;
+}
+
+.registerButton {
+    color: #ff6b6b;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.registerButton:hover {
+    color: #e65a5a;
+}
+
+.error {
+    color: red;
+    margin-top: 20px;
+    text-align: center;
+}
+
+.protectedInfo {
+    font-size: 12px;
+    color: #888;
+    text-align: center;
+    margin-top: 40px;
+}
+
+.register{
+    margin-top: 30px;
+    color: var(--text-color);
 }

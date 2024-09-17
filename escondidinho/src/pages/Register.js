@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import styles from '../assets/css/register.module.css'; // Importa o módulo CSS
+import styles from '../assets/css/register.module.css';
 import logo from '../assets/img/logo 1.png';
 import eyeIcon from '../assets/img/eye.png';
 import eyeSlashIcon from '../assets/img/eye-slash.png';
+import RoundedButton from './RoundedButton';
 
 const Register = ({ role }) => {
   const [nome, setNome] = useState('');
@@ -116,11 +117,12 @@ const Register = ({ role }) => {
           />
         </div>
         <div className={styles.contentBelowPassword}>
-          <button type="submit" className={styles.submitButton}>Registrar</button>
+          {/* Substituindo o botão de "Registrar" pelo RoundedButton */}
+          <RoundedButton text="Registrar" />
           {error && <p className={styles.error}>{error}</p>}
-          <p className={styles.loginLink}>
-            Já tem uma conta? <a href="/login">Voltar para Login</a>
-          </p>
+          
+          {/* Substituindo o link de "Voltar para Login" pelo RoundedButton */}
+          <RoundedButton text="Voltar para Login" onClick={() => navigate('/login')} />
         </div>
       </form>
     </div>

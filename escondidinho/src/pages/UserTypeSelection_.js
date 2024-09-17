@@ -1,8 +1,13 @@
-// src/pages/UserTypeSelection.js
-
+// @DEPRECATED// @DEPRECATED]
+// @DEPRECATED
+// @DEPRECATED
+// @DEPRECATED
+// @DEPRECATED
+// @DEPRECATED
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../assets/css/styles.css';
+import RoundedButton from './RoundedButton'; // Importe o RoundedButton
 
 const UserTypeSelection = () => {
   const navigate = useNavigate();
@@ -19,8 +24,9 @@ const UserTypeSelection = () => {
     <div className="container">
       <h2>Você é...</h2>
       <div className="button-group">
-        <button onClick={() => handleUserTypeSelection('cliente')}>Cliente</button>
-        <button onClick={() => handleUserTypeSelection('vendedor')}>Vendedor</button>
+        {/* Substituindo os botões normais pelo RoundedButton */}
+        <RoundedButton text="Cliente" onClick={() => handleUserTypeSelection('cliente')} />
+        <RoundedButton text="Vendedor" onClick={() => handleUserTypeSelection('vendedor')} />
       </div>
     </div>
   );

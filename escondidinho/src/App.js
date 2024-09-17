@@ -11,6 +11,7 @@ import NovaSenha from './pages/NovaSenha';
 import ChooseRole from './pages/ChooseRole';
 import RegisterCliente from './pages/RegisterCliente';
 import RegisterVendedor from './pages/RegisterVendedor';
+import './assets/css/global.css';
 
 
 function App() {

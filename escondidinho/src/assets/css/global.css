@@ -1,0 +1,69 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: #FFC4C8;    /* Cor primária */
+    --secondary-color: #FF5685;  /* Cor secundária */
+    --white-color: #FDFDFD; /* Cor de fundo */
+    --text-color: #5B4134;       /* Cor do texto */
+}
+
+
+body {
+    background-image: url(../img/fundo.png);
+
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: color 0.3s;
+}
+
+a:hover {
+    color: #ff6b6b;
+}
+
+input, button {
+    font-family: inherit;
+}
+
+.rounded-button {
+    background-color: #FFC4C8;
+    color: #5B4134;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+  
+.rounded-button:hover {
+    background-color: #e8afb3;
+}
+
+.buttonWrapper {
+    display: flex;
+    justify-content: center; /* Centraliza o botão horizontalmente */
+    width: 100%;
+}
+
+.button {
+    max-width: 350px; /* Define a largura máxima do botão */
+    padding: 15px;
+    background-color: #ff6b6b;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-bottom: 20px;
+}
+
+
