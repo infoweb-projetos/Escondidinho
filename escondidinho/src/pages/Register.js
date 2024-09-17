@@ -26,11 +26,19 @@ const Register = ({ role }) => {
       return;
     }
 
+    const requestBody = {
+      nomecliente: role === 'cliente' ? nome : undefined, // Para cliente
+      nomevendedor: role === 'vendedor' ? nome : undefined, // Para vendedor
+      email,
+      tel,
+      password,
+    };
+
     try {
       const response = await fetch(`http://localhost:5000/register/${role}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ nome, email, tel, password }),
+        body: JSON.stringify(requestBody),
       });
 
       if (response.ok) {
@@ -117,11 +125,8 @@ const Register = ({ role }) => {
           />
         </div>
         <div className={styles.contentBelowPassword}>
-          {/* Substituindo o botão de "Registrar" pelo RoundedButton */}
           <RoundedButton text="Registrar" />
           {error && <p className={styles.error}>{error}</p>}
-          
-          {/* Substituindo o link de "Voltar para Login" pelo RoundedButton */}
           <RoundedButton text="Voltar para Login" onClick={() => navigate('/login')} />
         </div>
       </form>

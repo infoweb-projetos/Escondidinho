@@ -110,3 +110,37 @@ input:focus {
     margin-top: 30px;
     color: var(--text-color);
 }
+
+
+
+/* src/assets/css/login.module.css */
+.socialLogin {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  .socialButton {
+    background-color: #4285f4; /* Google blue */
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    margin: 10px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .socialButton:nth-child(2) {
+    background-color: #1877f2; /* Facebook blue */
+  }
+  
+  .socialButton:nth-child(2):hover {
+    background-color: #165eab;
+  }
+  
+  .socialButton:hover {
+    background-color: #357ae8;
+  }
+  

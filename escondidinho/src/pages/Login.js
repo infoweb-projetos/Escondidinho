@@ -5,6 +5,14 @@ import logo from '../assets/img/logo.png';
 import eyeIcon from '../assets/img/eye.png';
 import eyeSlashIcon from '../assets/img/eye-slash.png';
 import RoundedButton from './RoundedButton';
+import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
+import { initializeApp } from 'firebase/app';
+import { firebaseConfig } from '../firebaseconfig';
+
+// Inicialize o Firebase
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const provider = new GoogleAuthProvider();
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -22,16 +30,29 @@ const Login = () => {
         body: JSON.stringify({ email, password }),
       });
 
-      const data = await response.json();
-
-      if (response.ok) {
-        localStorage.setItem('token', data.token);
-        window.location.href = '/dashboard';
-      } else {
-        setError(data.message || 'Erro no login');
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || 'Erro no login');
       }
+
+      const data = await response.json();
+      localStorage.setItem('token', data.token);
+      window.location.href = '/dashboard';
     } catch (err) {
-      setError('Erro no servidor');
+      setError(err.message);
+    }
+  };
+
+  const handleGoogleLogin = async () => {
+    try {
+      const result = await signInWithPopup(auth, provider);
+      const user = result.user;
+
+      console.log('Usuário logado com Google:', user);
+      window.location.href = '/dashboard';
+    } catch (error) {
+      console.error('Erro ao fazer login com Google:', error.message);
+      setError('Erro ao fazer login com Google');
     }
   };
 
@@ -74,10 +95,11 @@ const Login = () => {
             </label>
           </div>
           <RoundedButton text="Entrar" />
+          <RoundedButton text="Entrar com Google" onClick={handleGoogleLogin} />
           <Link className={styles.forgot} to="/EnviarCodigo">Esqueceu a senha?</Link>
           {error && <p className={styles.error}>{error}</p>}
         </form>
-        <p className={styles.register}>Sem conta ainda? <Link to="/register" className={styles.registerButton}><strong>Crie logo, cuida cuida!!</strong></Link></p>
+        <p className={styles.register}>Sem conta ainda? <Link to="/register" className={styles.registerButton}><strong>Crie logo, cuida cuida!!!</strong></Link></p>
         <p className={styles.protectedInfo}>Seus dados estão protegidos conosco</p>
       </div>
     </div>

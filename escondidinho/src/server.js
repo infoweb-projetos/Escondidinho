@@ -5,12 +5,12 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const { Pool } = require('pg');
 
-// Conexão com o banco de dados PostgreSQL
+// Configuração do banco de dados PostgreSQL
 const pool = new Pool({
-  user: 'dev',
+  user: 'postgres',
   host: '179.190.224.178',
   database: 'escondidinho',
-  password: '$uc3ss0',
+  password: '$ext@6',
   port: 5432,
 });
 
@@ -20,6 +20,11 @@ app.use(bodyParser.json());
 
 // Função para validar o comprimento das strings
 const validateLength = (value, maxLength) => value.length <= maxLength;
+
+// Função para criar um token JWT
+const createToken = (userId, userType) => {
+  return jwt.sign({ id: userId, tipo: userType }, 'secreta', { expiresIn: '1h' });
+};
 
 // Rota para cadastro de cliente
 app.post('/register/cliente', async (req, res) => {
@@ -73,6 +78,10 @@ app.post('/register/vendedor', async (req, res) => {
 app.post('/login', async (req, res) => {
   const { email, password } = req.body;
 
+  if (!email || !password) {
+    return res.status(400).json({ message: 'Email e senha são obrigatórios' });
+  }
+
   try {
     // Verificar se o usuário é um cliente
     const clienteResult = await pool.query('SELECT * FROM cliente WHERE email = $1', [email]);
@@ -81,7 +90,7 @@ app.post('/login', async (req, res) => {
       const cliente = clienteResult.rows[0];
       const isMatch = await bcrypt.compare(password, cliente.senha);
       if (isMatch) {
-        const token = jwt.sign({ id: cliente.id, tipo: 'cliente' }, 'secreta', { expiresIn: '1h' });
+        const token = createToken(cliente.id, 'cliente');
         return res.json({ token });
       }
     }
@@ -93,19 +102,20 @@ app.post('/login', async (req, res) => {
       const vendedor = vendedorResult.rows[0];
       const isMatch = await bcrypt.compare(password, vendedor.senha);
       if (isMatch) {
-        const token = jwt.sign({ id: vendedor.id, tipo: 'vendedor' }, 'secreta', { expiresIn: '1h' });
+        const token = createToken(vendedor.id, 'vendedor');
         return res.json({ token });
       }
     }
 
     res.status(400).json({ message: 'Credenciais inválidas' });
-
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Erro no servidor');
   }
 });
 
-app.listen(5000, () => {
-  console.log('Servidor rodando na porta 5000');
+// Iniciar o servidor
+const PORT = 5000;
+app.listen(PORT, () => {
+  console.log(`Servidor rodando na porta ${PORT}`);
 });
