@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from '../assets/css/register.module.css';
-import logo from '../assets/img/logo 1.png';
+import logo from '../assets/img/logo.png';
 import eyeIcon from '../assets/img/eye.png';
 import eyeSlashIcon from '../assets/img/eye-slash.png';
 import RoundedButton from './RoundedButton';
