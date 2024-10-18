@@ -114,6 +114,26 @@ app.post('/login', async (req, res) => {
   }
 });
 
+//rota para anunciar item
+app.post('/anunciar', async (req, res) => {
+  const { nome, descricao, preco, categoria, quantidade } = req.body;
+  
+  //verifica se o vendedor está autenticado 
+  const vendedorId = req.user.id; 
+
+  try {
+    const result = await pool.query(
+      'INSERT INTO itens (nome, descricao, preco, categoria, quantidade, vendedor_id) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *',
+      [nome, descricao, preco, categoria, quantidade, vendedorId]
+    );
+    res.status(201).json(result.rows[0]); //retorna o item que foi anunciado
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Erro no servidor');
+  }
+});
+
+
 // Iniciar o servidor
 const PORT = 5000;
 app.listen(PORT, () => {
