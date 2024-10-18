@@ -11,6 +11,7 @@ import NovaSenha from './pages/NovaSenha';
 import ChooseRole from './pages/ChooseRole';
 import RegisterCliente from './pages/RegisterCliente';
 import RegisterVendedor from './pages/RegisterVendedor';
+import AnunciarItem from './pages/AnunciarItem';
 import './assets/css/global.css';
 
 
@@ -27,6 +28,7 @@ function App() {
         <Route path="/VerificarCodigo" element={<VerificarCodigo />} />
         <Route path="/NovaSenha" element={<NovaSenha />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/anunciar" element={<AnunciarItem />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
