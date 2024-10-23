@@ -114,7 +114,6 @@ const AnunciarItem = () => {
           value={categoria}
           onChange={(e) => setCategoria(e.target.value)}
           required>
-          <option value="">Selecione uma categoria</option>
           <option value="Doces">Doces</option>
           <option value="Salgados">Salgados</option>
           <option value="Gelados">Gelados</option>
