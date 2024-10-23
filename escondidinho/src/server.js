@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const multer = require('multer'); // imagens
 const { Pool } = require('pg');
 
 // Configuração do banco de dados PostgreSQL
@@ -114,25 +115,53 @@ app.post('/login', async (req, res) => {
   }
 });
 
-//rota para anunciar item
-app.post('/anunciar', async (req, res) => {
+// Configurações do multer para salvar imagens no diretório que a gente escolher
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, 'uploads/'); // Pasta onde vai salvar as fotos
+  },
+  filename: (req, file, cb) => {
+    cb(null, Date.now() + path.extname(file.originalname)); 
+  }
+});
+
+// Filtro de tipo de arquivo para garantir que só imagens sejam enviadas
+const fileFilter = (req, file, cb) => {
+  const allowedTypes = /jpeg|jpg|png|gif/;
+  const mimeType = allowedTypes.test(file.mimetype);
+  const extname = allowedTypes.test(path.extname(file.originalname).toLowerCase());
+
+  if (mimeType && extname) {
+    return cb(null, true);
+  } else {
+    cb('Error: Apenas imagens são permitidas');
+  }
+};
+
+// Inicializa o multer com as configurações de armazenamento e filtro de arquivo
+const upload = multer({ storage, fileFilter });
+
+// Rota para anunciar item com upload de imagem
+app.post('/anunciar', upload.single('imagem'), async (req, res) => {
   const { nome, descricao, preco, categoria, quantidade } = req.body;
-  
-  //verifica se o vendedor está autenticado 
-  const vendedorId = req.user.id; 
+  //const vendedorId = req.user.id; 
+
+  // Caminho da imagem salva
+  const imagem = req.file ? req.file.filename : null;
 
   try {
     const result = await pool.query(
-      'INSERT INTO itens (nome, descricao, preco, categoria, quantidade, vendedor_id) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *',
-      [nome, descricao, preco, categoria, quantidade, vendedorId]
+      'INSERT INTO itens (nome, descricao, preco, categoria, quantidade, imagem, vendedor_id) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *',
+      [nome, descricao, preco, categoria, quantidade, imagem, vendedorId]
     );
-    res.status(201).json(result.rows[0]); //retorna o item que foi anunciado
+    res.status(201).json(result.rows[0]);
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Erro no servidor');
   }
 });
 
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Iniciar o servidor
 const PORT = 5000;
