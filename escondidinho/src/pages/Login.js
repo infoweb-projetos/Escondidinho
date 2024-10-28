@@ -5,6 +5,7 @@ import logo from '../assets/img/logo.png';
 import eyeIcon from '../assets/img/eye.png';
 import eyeSlashIcon from '../assets/img/eye-slash.png';
 import RoundedButton from './RoundedButton';
+import googleIcon from '../assets/img/google-icon.png';
 import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
 import { initializeApp } from 'firebase/app';
 import { firebaseConfig } from '../firebaseconfig';
@@ -95,7 +96,14 @@ const Login = () => {
             </label>
           </div>
           <RoundedButton text="Entrar" />
-          <RoundedButton text="Entrar com Google" onClick={handleGoogleLogin} />
+          <div className={styles.socialLogin}>
+            <img
+              src={googleIcon}
+              alt="Entrar com Google"
+              className={styles.googleIcon}
+              onClick={handleGoogleLogin}
+            />
+          </div>
           <Link className={styles.forgot} to="/EnviarCodigo">Esqueceu a senha?</Link>
           {error && <p className={styles.error}>{error}</p>}
         </form>
