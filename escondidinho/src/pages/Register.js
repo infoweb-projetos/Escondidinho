@@ -67,6 +67,12 @@ const Register = ({ role }) => {
           value={nome}
           onChange={(e) => setNome(e.target.value)}
           className={styles.input}
+          style={{
+            border: '2px solid var(--primary-color)',
+            borderRadius: '50px',
+            backgroundColor: '#f9f9f9',
+            height: '50px',
+          }}
         />
         <input
           type="email"
