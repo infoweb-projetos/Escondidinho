@@ -20,17 +20,20 @@ const AnunciarItem = () => {
 
   const handlePriceChange = (e) => {
     let value = e.target.value.replace(/\D/g, ''); 
-    value = (value / 100).toFixed(2); 
-    setPreco(`R$ ${value}`); 
+    value = (value / 100).toFixed(2);
+    setPreco(`R$ ${value}`);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // Remover o "R$ " antes de enviar ao backend
+    const precoNumerico = preco.replace("R$ ", "").replace(",", ".");
+
     const formData = new FormData();
     formData.append('nome', nome);
     formData.append('descricao', descricao);
-    formData.append('preco', preco);
+    formData.append('preco', precoNumerico);
     formData.append('categoria', categoria);
     formData.append('quantidade', quantidade);
     if (imagem) formData.append('imagem', imagem);
@@ -38,7 +41,7 @@ const AnunciarItem = () => {
     try {
       const response = await fetch('http://localhost:5000/anunciar', {
         method: 'POST',
-        headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }, 
+        headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` },
         body: formData,
       });
 
@@ -63,71 +66,70 @@ const AnunciarItem = () => {
   return (
     <div className={styles.container}>
       <h2>Anunciar Item</h2>
-      <form onSubmit={handleSubmit} encType="multipart/form-data">
-            
-        {!imagemPreview && (
+      <form onSubmit={handleSubmit} encType="multipart/form-data" className={styles.form}>
+        <div className={styles.imageUpload}>
           <input
             type="file"
             onChange={handleImageChange}
             accept="image/*"
             required
           />
-        )}
-       
-        {imagemPreview && (
-          <img 
-            src={imagemPreview} 
-            alt="Preview do Produto" 
-            className={styles.imagemPreview} 
-            onClick={() => document.getElementById('fileInput').click()} 
+          {imagemPreview && (
+            <img 
+              src={imagemPreview} 
+              alt="Preview do Produto" 
+              className={styles.imagemPreview}
+            />
+          )}
+        </div>
+        <div className={styles.inputGroup}>
+          <input
+            type="text"
+            placeholder="Nome do Item"
+            value={nome}
+            onChange={(e) => setNome(e.target.value)}
+            required
           />
-        )}
-      
-        <input
-          id="fileInput"
-          type="file"
-          onChange={handleImageChange}
-          accept="image/*"
-          style={{ display: 'none' }}
-        />
-        <input
-          type="text"
-          placeholder="Nome do Item"
-          value={nome}
-          onChange={(e) => setNome(e.target.value)}
-          required
-        />
-        <textarea
-          placeholder="Descrição"
-          value={descricao}
-          onChange={(e) => setDescricao(e.target.value)}
-          required
-        />      
-        <input
-          type="text"
-          placeholder="Preço"
-          value={preco} 
-          onChange={handlePriceChange}
-          required
-        />
-        <select
-          value={categoria}
-          onChange={(e) => setCategoria(e.target.value)}
-          required>
-          <option value="">Selecione uma categoria</option>
-          <option value="Doces">Doces</option>
-          <option value="Salgados">Salgados</option>
-          <option value="Gelados">Gelados</option>
-          <option value="Fitness">Fitness</option>
-        </select>
-        <input
-          type="number"
-          placeholder="Quantidade"
-          value={quantidade}
-          onChange={(e) => setQuantidade(e.target.value)}
-          required
-        />
-
+        </div>
+        <div className={styles.inputGroup}>
+          <textarea
+            placeholder="Descrição"
+            value={descricao}
+            onChange={(e) => setDescricao(e.target.value)}
+            required
+          />
+        </div>
+        <div className={styles.inputGroup}>
+          <input
+            type="text"
+            placeholder="Preço"
+            value={preco} 
+            onChange={handlePriceChange}
+            required
+          />
+        </div>
+        <div className={styles.inputGroup}>
+          <select
+            value={categoria}
+            onChange={(e) => setCategoria(e.target.value)}
+            required
+          >
+            <option value="">Selecione uma categoria</option>
+            <option value="Doces">Doces</option>
+            <option value="Salgados">Salgados</option>
+            <option value="Gelados">Gelados</option>
+            <option value="Fitness">Fitness</option>
+          </select>
+        </div>
+        <div className={styles.inputGroup}>
+          <input
+            type="number"
+            placeholder="Quantidade"
+            value={quantidade}
+            onChange={(e) => setQuantidade(e.target.value)}
+            required
+          />
+        </div>
         <RoundedButton text="Anunciar" />
         {error && <p className={styles.error}>{error}</p>}
       </form>

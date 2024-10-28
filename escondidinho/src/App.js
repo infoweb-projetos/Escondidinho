@@ -12,6 +12,7 @@ import ChooseRole from './pages/ChooseRole';
 import RegisterCliente from './pages/RegisterCliente';
 import RegisterVendedor from './pages/RegisterVendedor';
 import AnunciarItem from './pages/AnunciarItem';
+import ListaItens from './pages/LisaItens';
 import './assets/css/global.css';
 
 
@@ -21,7 +22,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<ChooseRole />} /> {/* Alterando a rota para ChooseRole */}
+        <Route path="/register" element={<ChooseRole />} />
         <Route path="/register/cliente" element={<RegisterCliente />} />
         <Route path="/register/vendedor" element={<RegisterVendedor />} />
         <Route path="/EnviarCodigo" element={<EnviarCodigo />} /> 
@@ -29,6 +30,7 @@ function App() {
         <Route path="/NovaSenha" element={<NovaSenha />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/anunciar" element={<AnunciarItem />} />
+        <Route path="/anuncios" element={<ListaItens />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
