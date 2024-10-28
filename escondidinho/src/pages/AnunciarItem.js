@@ -12,6 +12,12 @@ const AnunciarItem = () => {
   const [imagemPreview, setImagemPreview] = useState(null); 
   const [error, setError] = useState('');
 
+  const handleQuantityChange = (e) => {
+    const value = parseInt(e.target.value, 10);
+    setQuantidade(value >= 0 ? value : 0);
+  };
+  
+
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     setImagem(file);
@@ -126,7 +132,7 @@ const AnunciarItem = () => {
             type="number"
             placeholder="Quantidade"
             value={quantidade}
-            onChange={(e) => setQuantidade(e.target.value)}
+            onChange={handleQuantityChange}
             required
           />
         </div>
