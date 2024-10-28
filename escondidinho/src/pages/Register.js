@@ -7,7 +7,7 @@ import eyeSlashIcon from '../assets/img/eye-slash.png';
 import RoundedButton from './RoundedButton';
 
 const Register = ({ role }) => {
-  const [nome, setNome] = useState('');
+  const [nome, setNome] = useState(''); // Nome do vendedor ou cliente
   const [email, setEmail] = useState('');
   const [tel, setTel] = useState('');
   const [password, setPassword] = useState('');
@@ -27,12 +27,14 @@ const Register = ({ role }) => {
     }
 
     const requestBody = {
-      nomecliente: role === 'cliente' ? nome : undefined, // Para cliente
-      nomevendedor: role === 'vendedor' ? nome : undefined, // Para vendedor
+      nomecliente: role === 'cliente' ? nome : undefined, 
+      nomevendedor: role === 'vendedor' ? nome : undefined,
       email,
       tel,
       password,
     };
+
+    console.log("Register request body:", requestBody);
 
     try {
       const response = await fetch(`http://localhost:5000/register/${role}`, {

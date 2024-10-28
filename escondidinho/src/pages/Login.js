@@ -108,6 +108,7 @@ const Login = () => {
           {error && <p className={styles.error}>{error}</p>}
         </form>
         <p className={styles.register}>Sem conta ainda? <Link to="/register" className={styles.registerButton}><strong>Crie logo, cuida cuida!!!</strong></Link></p>
+
         <p className={styles.protectedInfo}>Seus dados estão protegidos conosco</p>
       </div>
     </div>
