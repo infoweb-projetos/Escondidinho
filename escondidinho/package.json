@@ -22,6 +22,11 @@
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
+    "env": {
+      "browser": true,
+      "es2021": true,
+      "jest": true
+    },
     "extends": [
       "react-app",
       "react-app/jest"
@@ -40,6 +45,9 @@
     ]
   },
   "devDependencies": {
-    "@babel/plugin-proposal-private-property-in-object": "^7.21.11"
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "eslint": "^9.13.0",
+    "eslint-plugin-flowtype": "^8.0.3",
+    "eslint-plugin-jest": "^28.8.3"
   }
 }
