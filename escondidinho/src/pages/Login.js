@@ -2,18 +2,13 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styles from '../assets/css/login.module.css';
 import logo from '../assets/img/logo.png';
-import eyeIcon from '../assets/img/eye.png';
-import eyeSlashIcon from '../assets/img/eye-slash.png';
+import { auth, provider } from './firebaseConfig';
+import { signInWithPopup } from 'firebase/auth';
 import RoundedButton from './RoundedButton';
-import googleIcon from '../assets/img/google-icon.png';
-import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
-import { initializeApp } from 'firebase/app';
-import { firebaseConfig } from '../firebaseconfig';
-
-// Inicialize o Firebase
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const provider = new GoogleAuthProvider();
+import TextInput from './TextInput';
+import PasswordInput from './PasswordInput';
+import SocialLoginButton from './SocialLoginButton';
+import { loginUser } from './api';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -23,20 +18,8 @@ const Login = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-
     try {
-      const response = await fetch('http://localhost:5000/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password }),
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || 'Erro no login');
-      }
-
-      const data = await response.json();
+      const data = await loginUser(email, password);
       localStorage.setItem('token', data.token);
       window.location.href = '/dashboard';
     } catch (err) {
@@ -47,9 +30,7 @@ const Login = () => {
   const handleGoogleLogin = async () => {
     try {
       const result = await signInWithPopup(auth, provider);
-      const user = result.user;
-
-      console.log('Usuário logado com Google:', user);
+      console.log('Usuário logado com Google:', result.user);
       window.location.href = '/dashboard';
     } catch (error) {
       console.error('Erro ao fazer login com Google:', error.message);
@@ -64,32 +45,19 @@ const Login = () => {
           <img src={logo} alt="Escondidinho Logo" />
         </div>
         <form onSubmit={handleLogin}>
-          <input
-            type="email"
+          <TextInput
             id="email"
-            name="email"
-            required
+            type="email"
             placeholder="E-mail"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
-          <div className={styles.passwordContainer}>
-            <input
-              type={showPassword ? 'text' : 'password'}
-              id="password"
-              name="password"
-              required
-              placeholder="Senha"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            <img
-              src={showPassword ? eyeSlashIcon : eyeIcon}
-              alt="Toggle visibility"
-              className={styles.togglePassword}
-              onClick={() => setShowPassword(!showPassword)}
-            />
-          </div>
+          <PasswordInput
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            showPassword={showPassword}
+            toggleShowPassword={() => setShowPassword(!showPassword)}
+          />
           <div className={styles.remember}>
             <label>
               <input type="checkbox" /> Lembrar de mim
@@ -97,18 +65,12 @@ const Login = () => {
           </div>
           <RoundedButton text="Entrar" />
           <div className={styles.socialLogin}>
-            <img
-              src={googleIcon}
-              alt="Entrar com Google"
-              className={styles.googleIcon}
-              onClick={handleGoogleLogin}
-            />
+            <SocialLoginButton onClick={handleGoogleLogin} />
           </div>
           <Link className={styles.forgot} to="/EnviarCodigo">Esqueceu a senha?</Link>
           {error && <p className={styles.error}>{error}</p>}
         </form>
         <p className={styles.register}>Sem conta ainda? <Link to="/register" className={styles.registerButton}><strong>Crie logo, cuida cuida!!!</strong></Link></p>
-
         <p className={styles.protectedInfo}>Seus dados estão protegidos conosco</p>
       </div>
     </div>
