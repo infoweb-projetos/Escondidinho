@@ -2,33 +2,23 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';  
 import '../assets/css/enviarcodigo.css';
 import logo from '../assets/img/logo 1.png';
+import RoundedButton from './RoundedButton';
+import { auth } from '../firebase.js';
+import { sendPasswordResetEmail } from 'firebase/auth';
 
 const RequestReset = () => {
   const [email, setEmail] = useState('');
-  const [error, setError] = useState('');
-  const [success, setSuccess] = useState('');
-  const navigate = useNavigate();  
+  const [message, setMessage] = useState('');
+ 
 
   const handleRequestReset = async (e) => {
     e.preventDefault();
-
     try {
-      const response = await fetch('http://localhost:5000/EnviarCodigo', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email }),
-      });
-
-      const data = await response.json();
-
-      if (response.ok) {
-        setSuccess('Código de verificação enviado para o seu e-mail.');
-        navigate('/verify-code');
-      } else {
-        setError(data.message || 'Erro ao solicitar redefinição de senha');
-      }
-    } catch (err) {
-      setError('Erro no servidor');
+      await sendPasswordResetEmail(auth, email)
+      setMessage('Email de redefinição de senha enviado! Verifique sua caixa de entrada.');
+    } catch (error) {
+      setMessage('Erro ao enviar e-mail. Verifique o endereço ou tente mais tarde.');
+      setMessage(`Erro ao enviar e-mail. ${error.message}`);
     }
   };
 
@@ -47,9 +37,8 @@ const RequestReset = () => {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
-        <button type="submit">Enviar Código</button>
-        {error && <p className="error">{error}</p>}
-        {success && <p className="success">{success}</p>}
+        <RoundedButton onClick={handleRequestReset} text="Enviar Código" />
+        {message && <p>{message}</p>}
       </form>
     </div>
   );

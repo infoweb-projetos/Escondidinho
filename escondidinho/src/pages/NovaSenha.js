@@ -3,39 +3,44 @@ import styles from '../assets/css/novasenha.module.css'; // Importa o módulo CS
 import logo from '../assets/img/logo.png'; // Ajuste o caminho conforme a sua estrutura de pastas
 import cadeado from '../assets/img/cadeado.png';
 import mini from '../assets/img/mini.png';
+import { useNavigate } from 'react-router-dom';
+import RoundedButton from './RoundedButton';
 
 const ResetPassword = () => {
-  const [newPassword, setNewPassword] = useState('');
+  const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
+  const navigate = useNavigate();
 
   const handleResetPassword = async (e) => {
     e.preventDefault();
 
-    if (newPassword !== confirmPassword) {
+    if (password !== confirmPassword) {
       setError('As senhas não coincidem');
       return;
     }
 
     try {
-      const response = await fetch('http://localhost:5000/NovaSenha', {
+      const response = await fetch('http://localhost:5000/AtualizarSenha', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ newPassword }),
+        body: JSON.stringify({ password }),
       });
 
       const data = await response.json();
 
       if (response.ok) {
-        setSuccess('Senha atualizada com sucesso!');
+        setSuccess('Senha atualizada com sucesso');
+        navigate('/login');
       } else {
-        setError(data.message || 'Erro ao redefinir a senha');
+        setError(data.message || 'Erro ao atualizar a senha');
       }
     } catch (err) {
       setError('Erro no servidor');
     }
   };
+
 
   return (
     <div className={styles.container}>
@@ -53,9 +58,11 @@ const ResetPassword = () => {
             <input
               type="password"
               id="newPassword"
-              placeholder="Senha"
-              value={newPassword}
-              onChange={(e) => setNewPassword(e.target.value)}
+              name="password"
+              required
+              placeholder="Nova Senha"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               className={styles.input}
             />
           </div>
@@ -64,7 +71,9 @@ const ResetPassword = () => {
             <input
               type="password"
               id="confirmPassword"
-              placeholder="Confirmar senha"
+              name="confirmPassword"
+              required
+              placeholder="Confirmar Nova Senha"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
               className={styles.input}

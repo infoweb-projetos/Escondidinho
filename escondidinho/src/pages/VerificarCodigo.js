@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import '../assets/css/verificarcodigo.css';
 import logo from '../assets/img/logo 1.png';
+import { useNavigate } from 'react-router-dom';
+import RoundedButton from './RoundedButton';
 
 const VerifyCode = () => {
-  const [email, setEmail] = useState(''); 
   const [code, setCode] = useState('');
   const [error, setError] = useState('');
-  const [success, setSuccess] = useState('');
+  const navigate = useNavigate();
 
   const handleVerifyCode = async (e) => {
     e.preventDefault();
@@ -15,13 +16,13 @@ const VerifyCode = () => {
       const response = await fetch('http://localhost:5000/VerificarCodigo', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, code }),
+        body: JSON.stringify({ code }),
       });
 
       const data = await response.json();
 
       if (response.ok) {
-        setSuccess('Código verificado com sucesso. Prossiga para redefinir a senha.');
+        navigate('/update-password');
       } else {
         setError(data.message || 'Código inválido');
       }
@@ -45,9 +46,8 @@ const VerifyCode = () => {
           value={code}
           onChange={(e) => setCode(e.target.value)}
         />
-        <button type="submit">Verificar Código</button>
+        <RoundedButton text="Verificar Código" />
         {error && <p className="error">{error}</p>}
-        {success && <p className="success">{success}</p>}
       </form>
     </div>
   );
