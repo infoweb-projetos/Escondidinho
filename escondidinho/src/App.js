@@ -12,7 +12,8 @@ import ChooseRole from './pages/ChooseRole';
 import RegisterCliente from './pages/RegisterCliente';
 import RegisterVendedor from './pages/RegisterVendedor';
 import AnunciarItem from './pages/AnunciarItem';
-import ListaItens from './pages/LisaItens';
+import ListaItens from './pages/ListaItens';
+import ProtectedRoute from './components/ProtectedRoute';
 import './assets/css/global.css';
 
 
@@ -22,16 +23,21 @@ function App() {
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<ChooseRole />} />
+        <Route path="/register" element={<ChooseRole />} />    
         <Route path="/register/cliente" element={<RegisterCliente />} />
         <Route path="/register/vendedor" element={<RegisterVendedor />} />
         <Route path="/EnviarCodigo" element={<EnviarCodigo />} /> 
         <Route path="/VerificarCodigo" element={<VerificarCodigo />} />
         <Route path="/reset-password" element={<NovaSenha />} />
         <Route path="/NovaSenha" element={<NovaSenha />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/anunciar" element={<AnunciarItem />} />
+        <Route element={<ProtectedRoute requiredRole="vendedor" />}>
+          <Route path="/anunciar" element={<AnunciarItem />} />
+        </Route>
+        <Route element={<ProtectedRoute requiredRole="cliente" />}>
+          <Route path="/dashboard" element={<Dashboard />} />
+        </Route>
         <Route path="/anuncios" element={<ListaItens />} />
+        
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
