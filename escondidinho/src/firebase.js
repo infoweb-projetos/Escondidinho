@@ -1,6 +1,6 @@
 // src/firebase.js
 import { initializeApp } from 'firebase/app';
-import { getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import { getAuth, GoogleAuthProvider, signInWithPopup, confirmPasswordReset } from 'firebase/auth'; // Importando corretamente
 import { getAnalytics } from 'firebase/analytics';
 
 // Sua configuração do Firebase
@@ -17,9 +17,23 @@ const firebaseConfig = {
 // Inicialize o Firebase
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
-const auth = getAuth(app);
+const auth = getAuth(app); // Aqui você já tem a instância do auth
 
-// Exportar o auth e o GoogleAuthProvider para uso em outros lugares
+const resetPassword = async (oobCode, newPassword) => {
+  try {
+    console.log("Código de redefinição:", oobCode); // Verifique o código sendo passado
+    await confirmPasswordReset(auth, oobCode, newPassword);
+    console.log("Senha redefinida com sucesso!");
+  } catch (error) {
+    console.error("Erro ao redefinir a senha:", error.code, error.message);
+    if (error.code === 'auth/invalid-action-code') {
+      console.error("O código de ação é inválido. Verifique se o código foi copiado corretamente ou se não expirou.");
+    }
+  }
+};
+
+
+// Exportar a configuração também
 const googleProvider = new GoogleAuthProvider();
 
-export { auth, googleProvider, signInWithPopup };
+export { firebaseConfig, auth, googleProvider, signInWithPopup, resetPassword }; // Exporte `resetPassword` para usá-lo em outros componentes

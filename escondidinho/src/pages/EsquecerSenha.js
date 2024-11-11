@@ -11,21 +11,23 @@ const ForgotPassword = () => {
 
   const handleResetPassword = async (e) => {
     e.preventDefault();
-
+  
     if (newPassword !== confirmPassword) {
       setError('As senhas não coincidem');
       return;
     }
-
+  
+    const token = new URLSearchParams(window.location.search).get('token'); // Pega o token da URL
+  
     try {
       const response = await fetch('http://localhost:5000/reset-password', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, newPassword }),
+        body: JSON.stringify({ token, newPassword }),
       });
-
+  
       const data = await response.json();
-
+  
       if (response.ok) {
         setSuccess('Senha atualizada com sucesso!');
       } else {
@@ -35,6 +37,7 @@ const ForgotPassword = () => {
       setError('Erro no servidor');
     }
   };
+  
 
   return (
     <div className="container">

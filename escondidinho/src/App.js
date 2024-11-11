@@ -27,6 +27,7 @@ function App() {
         <Route path="/register/vendedor" element={<RegisterVendedor />} />
         <Route path="/EnviarCodigo" element={<EnviarCodigo />} /> 
         <Route path="/VerificarCodigo" element={<VerificarCodigo />} />
+        <Route path="/reset-password" element={<NovaSenha />} />
         <Route path="/NovaSenha" element={<NovaSenha />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/anunciar" element={<AnunciarItem />} />

@@ -8,7 +8,7 @@ import RoundedButton from './RoundedButton';
 import googleIcon from '../assets/img/google-icon.png';
 import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
 import { initializeApp } from 'firebase/app';
-import { firebaseConfig } from '../firebaseconfig';
+import { firebaseConfig } from '../firebase';
 
 // Inicialize o Firebase
 const app = initializeApp(firebaseConfig);

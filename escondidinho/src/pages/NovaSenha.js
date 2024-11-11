@@ -1,94 +1,59 @@
-import React, { useState } from 'react';
-import styles from '../assets/css/novasenha.module.css'; // Importa o módulo CSS
-import logo from '../assets/img/logo.png'; // Ajuste o caminho conforme a sua estrutura de pastas
-import cadeado from '../assets/img/cadeado.png';
-import mini from '../assets/img/mini.png';
-import { useNavigate } from 'react-router-dom';
-import RoundedButton from './RoundedButton';
+import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
+import { auth } from '../firebase'; // Importando o auth do Firebase
+import { confirmPasswordReset } from 'firebase/auth';
 
-const ResetPassword = () => {
-  const [password, setPassword] = useState('');
+const NovaSenha = () => {
+  const location = useLocation();
+  const [oobCode, setOobCode] = useState('');
+  const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [error, setError] = useState('');
-  const [success, setSuccess] = useState('');
-  const navigate = useNavigate();
+  const [message, setMessage] = useState('');
+
+  useEffect(() => {
+    const queryParams = new URLSearchParams(location.search);
+    setOobCode(queryParams.get('oobCode')); // Captura o oobCode da URL
+  }, [location]);
 
   const handleResetPassword = async (e) => {
     e.preventDefault();
-
-    if (password !== confirmPassword) {
-      setError('As senhas não coincidem');
+    if (newPassword !== confirmPassword) {
+      setMessage('As senhas não coincidem');
       return;
     }
 
     try {
-      const response = await fetch('http://localhost:5000/AtualizarSenha', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ password }),
-      });
-
-      const data = await response.json();
-
-      if (response.ok) {
-        setSuccess('Senha atualizada com sucesso');
-        navigate('/login');
-      } else {
-        setError(data.message || 'Erro ao atualizar a senha');
-      }
-    } catch (err) {
-      setError('Erro no servidor');
+      // Chama a função do Firebase para redefinir a senha
+      await confirmPasswordReset(auth, oobCode, newPassword); // Usando o oobCode e a nova senha
+      setMessage('Senha redefinida com sucesso!');
+    } catch (error) {
+      setMessage(`Erro ao redefinir senha: ${error.message}`);
     }
   };
 
-
   return (
-    <div className={styles.container}>
-      <header className={styles.header}>
-        <img src={logo} alt="Logo Escondidinho" className={styles.logo} />
-      </header>
-      <div className={styles.formWrapper}>
-        <h1>Criar nova senha</h1>
-        <div className={styles.iconContainer}>
-          <img src={cadeado} alt="Ícone de cadeado" className={styles.icon} />
-        </div>
-        <form onSubmit={handleResetPassword} className={styles.form}>
-          <div className={styles.inputContainer}>
-            <label htmlFor="newPassword">Nova senha:</label>
-            <input
-              type="password"
-              id="newPassword"
-              name="password"
-              required
-              placeholder="Nova Senha"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className={styles.input}
-            />
-          </div>
-          <div className={styles.inputContainer}>
-            <label htmlFor="confirmPassword">Confirmar senha:</label>
-            <input
-              type="password"
-              id="confirmPassword"
-              name="confirmPassword"
-              required
-              placeholder="Confirmar Nova Senha"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-              className={styles.input}
-            />
-          </div>
-          <button type="submit" className={styles.submitButton}>Salvar</button>
-        </form>
-        <footer className={styles.footer}>
-          <p><img src={mini} alt="" className={styles.miniIcon} /> Seus dados estão protegidos conosco!</p>
-        </footer>
-        {error && <p className={styles.error}>{error}</p>}
-        {success && <p className={styles.success}>{success}</p>}
-      </div>
+    <div>
+      <h2>Redefinir Senha</h2>
+      <form onSubmit={handleResetPassword}>
+        <input
+          type="password"
+          placeholder="Nova senha"
+          value={newPassword}
+          onChange={(e) => setNewPassword(e.target.value)}
+          required
+        />
+        <input
+          type="password"
+          placeholder="Confirmar nova senha"
+          value={confirmPassword}
+          onChange={(e) => setConfirmPassword(e.target.value)}
+          required
+        />
+        <button type="submit">Redefinir Senha</button>
+        {message && <p>{message}</p>}
+      </form>
     </div>
   );
 };
 
-export default ResetPassword;
+export default NovaSenha;
