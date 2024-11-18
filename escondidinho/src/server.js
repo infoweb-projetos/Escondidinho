@@ -17,7 +17,6 @@ const pool = new Pool({
   port: 5432,
 });
 
-
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
@@ -180,8 +179,61 @@ app.get('/itens', verifyToken, async (req, res) => {
 // Serve arquivos estáticos para uploads
 app.use('/uploads', express.static(uploadDir));
 
-// Inicialização do servidor
-const PORT = 5000;
-app.listen(PORT, () => {
-  console.log(`Servidor rodando na porta ${PORT}`);
+// Endpoint para iniciar a recuperação de senha
+app.post('/forgot-password', async (req, res) => {
+  const { email } = req.body;
+
+  try {
+    // Verificar se o usuário existe
+    let result = await pool.query('SELECT * FROM cliente WHERE email = $1', [email]);
+    let user = result.rows[0];
+
+    if (!user) {
+      return res.status(404).json({ message: 'Usuário não encontrado' });
+    }
+
+    // Gerar token de recuperação
+    const token = jwt.sign({ id: user.id }, 'secreta', { expiresIn: '15m' }); // token com validade de 15 minutos
+
+    // Enviar email com link de recuperação
+    const resetLink = `http://localhost:3000/reset-password?token=${token}`;
+    // Lógica para enviar email com a URL acima
+    
+    res.json({ message: 'Link de recuperação enviado para o seu email' });
+  } catch (err) {
+    console.error('Erro ao iniciar recuperação de senha:', err.message);
+    res.status(500).json({ message: 'Erro no servidor' });
+  }
+});
+
+// Endpoint para redefinir a senha
+// Endpoint para redefinir a senha
+app.post('/reset-password', async (req, res) => {
+  const { token, password } = req.body;
+
+  try {
+    // Verifica o token
+    const decoded = jwt.verify(token, 'secreta');
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    // Atualiza a senha no banco de dados
+    const result = await pool.query('UPDATE cliente SET senha = $1 WHERE id = $2 RETURNING *', [hashedPassword, decoded.id]);
+    
+    if (result.rows.length > 0) {
+      console.log(`Senha atualizada para o usuário com ID: ${decoded.id}`);
+      res.json({ message: 'Senha redefinida com sucesso' });
+    } else {
+      console.log(`Usuário com ID ${decoded.id} não encontrado para redefinição de senha.`);
+      res.status(404).json({ message: 'Usuário não encontrado' });
+    }
+  } catch (err) {
+    console.error('Erro ao redefinir senha:', err.message);
+    res.status(500).json({ message: 'Erro no servidor' });
+  }
+});
+
+
+// Iniciar servidor
+app.listen(5000, () => {
+  console.log('Servidor iniciado na porta 5000');
 });

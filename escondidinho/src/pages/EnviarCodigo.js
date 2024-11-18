@@ -10,14 +10,12 @@ const RequestReset = () => {
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
  
-
   const handleRequestReset = async (e) => {
     e.preventDefault();
     try {
-      await sendPasswordResetEmail(auth, email)
+      await sendPasswordResetEmail(auth, email);
       setMessage('Email de redefinição de senha enviado! Verifique sua caixa de entrada.');
     } catch (error) {
-      setMessage('Erro ao enviar e-mail. Verifique o endereço ou tente mais tarde.');
       setMessage(`Erro ao enviar e-mail. ${error.message}`);
     }
   };
@@ -37,7 +35,7 @@ const RequestReset = () => {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
-        <RoundedButton onClick={handleRequestReset} text="Enviar Código" />
+        <button type="submit">Enviar Código</button>
         {message && <p>{message}</p>}
       </form>
     </div>
