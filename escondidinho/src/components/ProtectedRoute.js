@@ -1,6 +1,6 @@
 import React from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
-import jwt_decode from 'jwt-decode';
+import { jwtDecode } from 'jwt-decode'; 
 
 const ProtectedRoute = ({ requiredRole }) => {
   const token = localStorage.getItem('token');
@@ -10,9 +10,9 @@ const ProtectedRoute = ({ requiredRole }) => {
   }
 
   try {
-    const decodedToken = jwt_decode(token);
+    const decodedToken = jwtDecode(token); 
     if (decodedToken.role !== requiredRole) {
-      return <Navigate to="/not-authorized" />; 
+      return <Navigate to="/not-authorized" />;
     }
     return <Outlet />;
   } catch (error) {
