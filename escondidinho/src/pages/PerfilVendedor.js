@@ -1,5 +1,89 @@
+import React from 'react';
+import styles from '../assets/css/perfilvendedor.module.css';
+import RoundedButton from './RoundedButton';
+import logo from '../assets/img/logo 1.svg';
+import home from '../assets/img/home.svg';
+import perfil from '../assets/img/perfil.svg';
+
+const AnunciarItem = () => {
+  return (
+    <><div className={styles.header}>
+      <img src={logo}  alt="logo escondidinho" />
+      <div className={styles.homeprofile}>
+        <a href="index.html">
+            <img src={perfil} alt="Ícone Home" class="icon-perfil" />
+        </a>
+        <a href="index.html">
+            <img src={home} alt="Ícone Home" class="icon-home" />
+         </a> 
+    </div>
+    </div>
+    
+    <div className={styles.container}>
+        <h1 className={styles.titulo}>Perfil</h1>
+        <hr/>
+
+
+
+
+
+
+
+        <form encType="multipart/form-data" className={styles.form}>
+          <div className={styles.imageUpload}>
+            <input type="file" accept="image/*" disabled />
+            {/* Preview estático para exibição */}
+            <img
+              src="https://via.placeholder.com/150"
+              alt="Preview do Produto"
+              className={styles.imagemPreview} />
+          </div>
+          <div className={styles.inputGroup}>
+            <input type="text" placeholder="Nome do Item" disabled />
+          </div>
+          <div className={styles.inputGroup}>
+            <textarea placeholder="Descrição" disabled />
+          </div>
+          <div className={styles.inputGroup}>
+            <input type="text" placeholder="Preço" disabled />
+          </div>
+          <div className={styles.inputGroup}>
+            <select disabled>
+              <option value="">Selecione uma categoria</option>
+              <option value="Doces">Doces</option>
+              <option value="Salgados">Salgados</option>
+              <option value="Gelados">Gelados</option>
+              <option value="Fitness">Fitness</option>
+            </select>
+          </div>
+          <div className={styles.inputGroup}>
+            <input type="number" placeholder="Quantidade" disabled />
+          </div>
+          <RoundedButton text="Anunciar" />
+          {/* Mensagem de erro estática para exibição */}
+          <p className={styles.error}>Erro ao anunciar o item</p>
+        </form>
+      </div></>
+  );
+};
+
+export default AnunciarItem;
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* 
 import React, { useState } from 'react';
-import styles from '../assets/css/anunciarItem.module.css';
+import styles from '../assets/css/perfilvendedor.module.css';
 import RoundedButton from './RoundedButton';
 
 const AnunciarItem = () => {
@@ -144,3 +228,4 @@ const AnunciarItem = () => {
 };
 
 export default AnunciarItem;
+ */

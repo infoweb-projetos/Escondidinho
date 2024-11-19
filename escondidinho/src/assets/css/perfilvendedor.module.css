@@ -1,0 +1,50 @@
+*{
+    margin:0;
+    padding:0;
+}
+
+.header{
+    background-color: #FFE0BB;
+    padding: 1em;
+    padding-left: 20px;
+    padding-right: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+.homeprofile{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    cursor: pointer;
+}
+
+.icon-home, .icon-perfil {
+    transition: transform 0.3s, filter 0.3s; /* Transição suave para os efeitos */
+}
+
+.icon-home:hover {
+    filter: brightness(1.5); 
+    transform: scale(1.2); 
+  }
+  
+  .icon-perfil:hover {
+    filter: brightness(1.5); 
+    transform: scale(1.2); 
+  }
+
+  h1{
+    color: #FF5685;
+    font-size: 36px;
+    text-align: center;
+    margin-top: 2em;
+  }
+
+  hr{
+    width:50%;
+    margin: 20px auto;
+    background-color: transparent; 
+    border-top: 1px solid #6AC7E6;
+}
