@@ -26,20 +26,19 @@
     width: 150px;
     margin-bottom: 30px;
 }
-input {
+input{
     width: 100%;
     padding: 15px;
-    margin-bottom: 20px; 
-    border: 1px solid #ffcccb;
-    border-radius: 25px;
+    margin: 10px 0;
+    border: 1px solid var(--primary-color);
+    border-radius: 50px;
     font-size: 16px;
-    transition: border 0.3s;
+    background-color: #f9f9f9;
+    position: relative;
+    height: 50px;
+    outline: transparent;
 }
 
-input:focus {
-    border-color: #ff6b6b;
-    outline: none;
-}
 
 .passwordContainer {
     position: relative;
@@ -55,15 +54,17 @@ input:focus {
     border: 1px solid #ffcccb;
     border-radius: 25px;
     font-size: 16px;
+    box-sizing: border-box;
 }
 
 .togglePassword {
     position: absolute;
     right: 10px;
-    top: 38%;
+    top: 50%;
     transform: translateY(-50%);
     cursor: pointer;
     width: 20px;
+    height: 20px;
 }
 
 .remember {

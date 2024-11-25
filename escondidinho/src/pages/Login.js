@@ -5,6 +5,7 @@ import logo from '../assets/img/logo.png';
 import eyeIcon from '../assets/img/eye.png';
 import eyeSlashIcon from '../assets/img/eye-slash.png';
 import RoundedButton from './RoundedButton';
+import PasswordInput from './PasswordInput';
 import googleIcon from '../assets/img/google-icon.png';
 import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
 import { initializeApp } from 'firebase/app';
@@ -81,7 +82,7 @@ const Login = () => {
               required
               placeholder="Senha"
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              
             />
             <img
               src={showPassword ? eyeSlashIcon : eyeIcon}
@@ -89,6 +90,13 @@ const Login = () => {
               className={styles.togglePassword}
               onClick={() => setShowPassword(!showPassword)}
             />
+            {/* <PasswordInput 
+            id="password" 
+            name="password" 
+            placeholder="Senha" 
+            value={password} 
+            onChange={(e) => setPassword(e.target.value)}
+            /> */}
           </div>
           <div className={styles.remember}>
             <label>

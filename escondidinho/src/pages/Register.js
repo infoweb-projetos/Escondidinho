@@ -70,7 +70,7 @@ const Register = ({ role }) => {
           onChange={(e) => setNome(e.target.value)}
           className={styles.input}
           style={{
-            border: '2px solid var(--primary-color)',
+            border: '1px solid var(--primary-color)',
             borderRadius: '50px',
             backgroundColor: '#f9f9f9',
             height: '50px',

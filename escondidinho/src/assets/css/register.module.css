@@ -24,16 +24,17 @@ form {
     flex-direction: column;
 }
 
-.input{
+input{
     width: 100%;
     padding: 15px;
     margin: 10px 0;
-    border: 2px solid var(--primary-color);
+    border: 1px solid var(--primary-color);
     border-radius: 50px;
     font-size: 16px;
     background-color: #f9f9f9;
     position: relative;
     height: 50px;
+    outline: transparent;
 }
 
 .input::placeholder {
@@ -50,7 +51,7 @@ form {
     width: 100%;
     padding: 15px;
     padding-right: 40px;
-    border: 2px solid var(--primary-color);
+    border: 1px solid var(--primary-color);
     border-radius: 50px;
     font-size: 16px;
 }
