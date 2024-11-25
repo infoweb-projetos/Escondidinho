@@ -73,12 +73,18 @@ input:focus {
 }
 
 .remember label {
-    display: flex;
+    display: inline-flex;
     align-items: center;
+    white-space: nowrap;
+    gap: 10px;
 }
 
 .remember input {
-    margin-right: 10px;
+    display: inline-block; 
+    width: 16px;
+    height: 16px; 
+    margin: 0;
+    vertical-align: middle;
 }
 
 .forgot {
