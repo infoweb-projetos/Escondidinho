@@ -232,7 +232,6 @@ app.post('/reset-password', async (req, res) => {
   }
 });
 
-
 // Iniciar servidor
 app.listen(5000, () => {
   console.log('Servidor iniciado na porta 5000');

@@ -15,6 +15,7 @@ import AnunciarItem from './pages/AnunciarItem';
 import ListaItens from './pages/ListaItens';
 import PerfilVendedor from './pages/PerfilVendedor';
 import ProtectedRoute from './components/ProtectedRoute';
+import Carrinho from './pages/Carrinho';
 import './assets/css/global.css';
 
 
@@ -33,6 +34,7 @@ function App() {
         <Route path="/NovaSenha" element={<NovaSenha />} />
         <Route path="/anunciar" element={<AnunciarItem />} />
         <Route path="/PerfilVendedor" element={<PerfilVendedor />} />
+        <Route path="/carrinho" element={<Carrinho />} />
         {/*<Route element={<ProtectedRoute requiredRole="vendedor" />}>
           <Route path="/anunciar" element={<AnunciarItem />} />
   </Route>*/}
