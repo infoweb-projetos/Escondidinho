@@ -1,9 +1,14 @@
 // src/firebase.js
 import { initializeApp } from 'firebase/app';
-import { getAuth, GoogleAuthProvider, signInWithPopup, confirmPasswordReset } from 'firebase/auth'; // Importando corretamente
+import {
+  getAuth,
+  GoogleAuthProvider,
+  signInWithPopup,
+  confirmPasswordReset,
+} from 'firebase/auth';
 import { getAnalytics } from 'firebase/analytics';
 
-// Sua configuração do Firebase
+// Configuração do Firebase
 const firebaseConfig = {
   apiKey: "AIzaSyDE_ssUi_UrAf0zqLyC65DqPF4E49m69NU",
   authDomain: "escondidinho-6b4dd.firebaseapp.com",
@@ -11,17 +16,18 @@ const firebaseConfig = {
   storageBucket: "escondidinho-6b4dd.appspot.com",
   messagingSenderId: "921529239055",
   appId: "1:921529239055:web:52b616a034ab747b26857a",
-  measurementId: "G-70C587K8NV"
+  measurementId: "G-70C587K8NV",
 };
 
 // Inicialize o Firebase
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
-const auth = getAuth(app); // Aqui você já tem a instância do auth
+const auth = getAuth(app);
 
+// Função para redefinir senha
 const resetPassword = async (oobCode, newPassword) => {
   try {
-    console.log("Código de redefinição:", oobCode); // Verifique o código sendo passado
+    console.log("Código de redefinição:", oobCode);
     await confirmPasswordReset(auth, oobCode, newPassword);
     console.log("Senha redefinida com sucesso!");
   } catch (error) {
@@ -32,8 +38,7 @@ const resetPassword = async (oobCode, newPassword) => {
   }
 };
 
-
-// Exportar a configuração também
+// Configuração do Google Auth
 const googleProvider = new GoogleAuthProvider();
 
-export { firebaseConfig, auth, googleProvider, signInWithPopup, resetPassword }; // Exporte `resetPassword` para usá-lo em outros componentes
+export { firebaseConfig, auth, googleProvider, signInWithPopup, resetPassword };
