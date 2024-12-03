@@ -1,30 +1,59 @@
-.container {
+body{
+    height: 100vh;
+
+}
+.header{
+    background-color: #FFE0BB;
+    padding: 1em;
+    padding-left: 20px;
+    padding-right: 20px;
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     align-items: center;
-    min-height: 100vh;
+    
+
+}
+#root {
+    display:flex !important;
+    align-items: center !important;
+}
+.container {
+    
+    background-image: url(../img/fundo.png);
+    max-height: 100vh;
     font-family: 'Arial', sans-serif;
-    background-image: url('../img/fundo.png'); 
     background-size: cover;
     background-position: center;
-    padding: 0 10%;
+    padding: 0;
+    width: 70em;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    display: flex;
+    border-radius: 50px;
+    margin-top: 10em;
+
+
 }
+
 
 .formContainer {
     display: flex;
     flex-direction: column;
     align-items: center;
     background-color: #fff;
-    padding: 40px;
-    border-radius: 10px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 400px;
+    padding: 70px;
+    /*box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);*/
+    width: 35em;
+  
+    border-top-left-radius: 50px;
+    border-bottom-left-radius: 50px;
+   
 }
 
 .logo img {
-    width: 150px;
-    margin-bottom: 30px;
+    width: 200px;
+    margin-bottom: 40px;
 }
 input{
     width: 100%;
@@ -33,10 +62,11 @@ input{
     border: 1px solid var(--primary-color);
     border-radius: 50px;
     font-size: 16px;
-    background-color: #f9f9f9;
-    position: relative;
+    background-color: #ffffff;
+
     height: 50px;
     outline: transparent;
+
 }
 
 
@@ -78,6 +108,8 @@ input{
     align-items: center;
     white-space: nowrap;
     gap: 10px;
+    left:50em;
+    color: #5B4134;
 }
 
 .remember input {
@@ -86,12 +118,17 @@ input{
     height: 16px; 
     margin: 0;
     vertical-align: middle;
+    left: 4%;
+  
+  
+ 
+ 
 }
 
 .forgot {
     display: block;
     text-align: center;
-    color: #ff6b6b;
+    color: #FF5685;
     margin-top: 30px;
     text-decoration: none;
     transition: color 0.3s;
@@ -102,7 +139,7 @@ input{
 }
 
 .registerButton {
-    color: #ff6b6b;
+    color: #FF5685;
     font-weight: bold;
     text-decoration: none;
 }

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom'; // Atualizado para importar useNavigate
 import styles from '../assets/css/login.module.css';
-import logo from '../assets/img/logo.png';
+import logo from '../assets/img/logo 1.svg';
 import eyeIcon from '../assets/img/eye.png';
 import eyeSlashIcon from '../assets/img/eye-slash.png';
 import RoundedButton from './RoundedButton';
@@ -9,6 +9,7 @@ import googleIcon from '../assets/img/google-icon.png';
 import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
 import { initializeApp } from 'firebase/app';
 import { firebaseConfig } from '../firebase';
+
 
 // Inicialize o Firebase
 const app = initializeApp(firebaseConfig);
@@ -90,70 +91,68 @@ const Login = () => {
     }
   };
 
+
   return (
-    <div className={styles.container}>
-      <div className={styles.formContainer}>
-        <div className={styles.logo}>
-          <img src={logo} alt="Escondidinho Logo" />
-        </div>
-        <form onSubmit={handleLogin}>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            placeholder="E-mail"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-          <div className={styles.passwordContainer}>
+    <><div className={styles.header}>
+    <img src={logo} alt="logo escondidinho" />
+  </div>
+<div className={styles.container}>
+        <div className={styles.formContainer}>
+          
+          <form onSubmit={handleLogin}>
             <input
-              type={showPassword ? 'text' : 'password'}
-              id="password"
-              name="password"
-              placeholder="Senha"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-            <img
-              src={showPassword ? eyeSlashIcon : eyeIcon}
-              alt="Toggle visibility"
-              className={styles.togglePassword}
-              onClick={() => setShowPassword(!showPassword)}
-            />
-          </div>
-          <div className={styles.remember}>
-            <label>
+              type="email"
+              id="email"
+              name="email"
+              placeholder="E-mail"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required />
+            <div className={styles.passwordContainer}>
               <input
-                type="checkbox"
-                checked={rememberMe}
-                onChange={(e) => setRememberMe(e.target.checked)}
-              />{' '}
-              Lembrar de mim
-            </label>
-          </div>
-          <RoundedButton text="Entrar" />
-          <div className={styles.socialLogin}>
-            <img
-              src={googleIcon}
-              alt="Entrar com Google"
-              className={styles.googleIcon}
-              onClick={handleGoogleLogin}
-            />
-          </div>
-          <Link className={styles.forgot} to="/EnviarCodigo">Esqueceu a senha?</Link>
-          {error && <p className={styles.error}>{error}</p>}
-        </form>
-        <p className={styles.register}>
-          Sem conta ainda?{' '}
-          <Link to="/register" className={styles.registerButton}>
-            <strong>Crie logo, cuida cuida!!!</strong>
-          </Link>
-        </p>
-        <p className={styles.protectedInfo}>Seus dados estão protegidos conosco</p>
-      </div>
-    </div>
+                type={showPassword ? 'text' : 'password'}
+                id="password"
+                name="password"
+                placeholder="Senha"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required />
+              <img
+                src={showPassword ? eyeSlashIcon : eyeIcon}
+                alt="Toggle visibility"
+                className={styles.togglePassword}
+                onClick={() => setShowPassword(!showPassword)} />
+            </div>
+            <div className={styles.remember}>
+              <label>
+                <input
+                  type="checkbox"
+                  checked={rememberMe}
+                  onChange={(e) => setRememberMe(e.target.checked)} />{' '}
+                Lembrar de mim
+              </label>
+            </div>
+            <RoundedButton text="Entrar" />
+            <div className={styles.socialLogin}>
+              <img
+                src={googleIcon}
+                alt="Entrar com Google"
+                className={styles.googleIcon}
+                onClick={handleGoogleLogin} />
+            </div>
+            <Link className={styles.forgot} to="/EnviarCodigo">Esqueceu a senha?</Link>
+            {error && <p className={styles.error}>{error}</p>}
+          </form>
+          <p className={styles.register}>
+            Sem conta ainda?{' '}
+            <Link to="/register" className={styles.registerButton}>
+              <strong>Crie logo, cuida cuida!!!</strong>
+            </Link>
+          </p>
+          <p className={styles.protectedInfo}>Seus dados estão protegidos conosco</p>
+        </div>
+      </div></>
+    
   );
 };
 
