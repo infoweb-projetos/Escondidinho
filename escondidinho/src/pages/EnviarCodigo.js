@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';  
+import { useNavigate } from 'react-router-dom';
 import '../assets/css/enviarcodigo.css';
 import logo from '../assets/img/logo 1.png';
 import RoundedButton from './RoundedButton';
@@ -9,7 +9,7 @@ import { sendPasswordResetEmail } from 'firebase/auth';
 const RequestReset = () => {
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
- 
+
   const handleRequestReset = async (e) => {
     e.preventDefault();
     try {
@@ -21,25 +21,26 @@ const RequestReset = () => {
   };
 
   return (
-    <div className="container">
-      <div className="logo">
-        <img src={logo} alt="Logo" />
+    <div className="request-reset-page">
+      <div className="container">
+        <div className="logo">
+          <img src={logo} alt="Logo" />
+        </div>
+        <form onSubmit={handleRequestReset} className="form">
+          <input
+            type="email"
+            id="email"
+            name="email"
+            required
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="input-field"
+          />
+          <button type="submit" className="submit-button">Enviar Código</button>
+          {message && <p className="message">{message}</p>}
+        </form>
       </div>
-      <form onSubmit={handleRequestReset} className="form">
-        <h2>Redefinir Senha</h2>
-        <input
-          type="email"
-          id="email"
-          name="email"
-          required
-          placeholder="Digite seu email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          className="input-field"
-        />
-        <button type="submit" className="submit-button">Enviar Código</button>
-        {message && <p className="message">{message}</p>}
-      </form>
     </div>
   );
 };

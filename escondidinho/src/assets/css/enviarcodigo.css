@@ -1,46 +1,50 @@
-.request-reset-page * {
+.request-reset-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+  }
+  
+  .request-reset-page * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: 'Arial', sans-serif;
   }
   
-  .request-reset-page body {
-    background: #f9f9f9;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    color: #333;
-  }
-  
   .request-reset-page .container {
-    background-color: #fcacb3;
+    background-color: #ffffff;
     padding: 60px;
     border-radius: 16px;
     box-shadow: 0 4px 40px rgba(0, 0, 0, 0.15);
     width: 100%;
     max-width: 450px;
     text-align: center;
-    color: white;
+    color: black; /* Cor do texto alterada para preto */
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
   }
   
   .request-reset-page .logo img {
     width: 180px;
     margin-bottom: 30px;
-    filter: brightness(0) invert(1);
+    /*filter: brightness(0) invert(1);*/
+    filter: grayscale(100%);
   }
   
   .request-reset-page h2 {
     font-size: 30px;
     margin-bottom: 30px;
-    color: #fff;
+    color: black; /* Cor do título alterada para preto */
   }
   
   .request-reset-page .form {
     display: flex;
     flex-direction: column;
     gap: 20px;
+    width: 100%; 
   }
   
   .request-reset-page .input-field {
@@ -62,22 +66,19 @@
   
   .request-reset-page .submit-button {
     padding: 16px;
-    background-color: #e74c3c;
-    color: white;
+    background-color: #fcacb3;
+    color: black;
     border: none;
-    border-radius: 10px;
+    border-radius: 50px;
     cursor: pointer;
     font-size: 18px;
     transition: 0.3s ease;
-  }
-  
-  .request-reset-page .submit-button:hover {
-    background-color: #9b59b6;
+    width: 100%; 
   }
   
   .request-reset-page .message {
     font-size: 18px;
-    color: #fff;
+    color: black; /* Cor da mensagem alterada para preto */
     margin-top: 25px;
     background-color: rgba(0, 0, 0, 0.1);
     padding: 15px;
