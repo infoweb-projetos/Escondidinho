@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import '../assets/css/verificarcodigo.css';
-import logo from '../assets/img/logo 1.png';
+import logo from '../assets/img/logo 1.svg';
 import { useNavigate } from 'react-router-dom';
 import RoundedButton from './RoundedButton';
 
@@ -32,6 +32,7 @@ const VerifyCode = () => {
   };
 
   return (
+    <div className="request-reset-page">
     <div className="container">
       <div className="logo">
         <img src={logo} alt="Logo" />
@@ -49,6 +50,7 @@ const VerifyCode = () => {
         <RoundedButton text="Verificar Código" />
         {error && <p className="error">{error}</p>}
       </form>
+    </div>
     </div>
   );
 };
