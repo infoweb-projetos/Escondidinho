@@ -21,7 +21,7 @@
     width: 100%;
     max-width: 450px;
     text-align: center;
-    color: black; /* Cor do texto alterada para preto */
+    color: black; 
     display: flex;
     flex-direction: column;
     align-items: center; 
@@ -30,14 +30,13 @@
   .request-reset-page .logo img {
     width: 180px;
     margin-bottom: 30px;
-    /*filter: brightness(0) invert(1);*/
     filter: grayscale(100%);
   }
   
   .request-reset-page h2 {
     font-size: 30px;
     margin-bottom: 30px;
-    color: black; /* Cor do título alterada para preto */
+    color: black; 
   }
   
   .request-reset-page .form {
@@ -78,7 +77,7 @@
   
   .request-reset-page .message {
     font-size: 18px;
-    color: black; /* Cor da mensagem alterada para preto */
+    color: black; 
     margin-top: 25px;
     background-color: rgba(0, 0, 0, 0.1);
     padding: 15px;
