@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styles from '../assets/css/anunciarItem.module.css';
 import RoundedButton from './RoundedButton';
+import logo from '../assets/img/logo 1.svg';
 
 const AnunciarItem = () => {
   const [nome, setNome] = useState('');
@@ -76,91 +77,90 @@ const AnunciarItem = () => {
   };
 
   return (
+    <div className={styles.fundoRegistro}> 
+   
+    <><div className={styles.header}>
+      <img src={logo} alt="logo escondidinho" />
+    </div> <h1>Anunciar Item</h1>
     <div className={styles.container}>
-      <h2>Anunciar Item</h2>
-      <form onSubmit={handleSubmit} encType="multipart/form-data" className={styles.form}>
-        <div className={styles.imageUpload}>
-          <label htmlFor="image-upload" className={styles.placeholderImage}>
-            {imagemPreview ? (
-              <img src={imagemPreview} alt="Preview do Produto" className={styles.imagemPreview} />
-            ) : (
-              <span>Adicionar Imagem</span>
-            )}
-          </label>
-          <input
-            type="file"
-            id="image-upload"
-            onChange={handleImageChange}
-            accept="image/*"
-            multiple
-            className={styles.fileInput}
-            required
-          />
-          <div className={styles.imagePreviews}>
-            {}
-            {imagens.slice(1).map((imagem, index) => (
-              <img 
-                key={index} 
-                src={URL.createObjectURL(imagem)} 
-                alt={`Imagem preview ${index + 1}`} 
-                className={styles.imagemPreview}
-              />
-            ))}
-          </div>
-        </div>
+        <form onSubmit={handleSubmit} encType="multipart/form-data" className={styles.form}>
+          <div className={styles.imageUpload}>
+            <label htmlFor="image-upload" className={styles.placeholderImage}>
+              {imagemPreview ? (
+                <img src={imagemPreview} alt="Preview do Produto" className={styles.imagemPreview} />
+              ) : (
+                <span>Adicionar Imagem</span>
+              )}
+            </label>
+            <input
+              type="file"
+              id="image-upload"
+              onChange={handleImageChange}
+              accept="image/*"
+              multiple
+              className={styles.fileInput}
+              required />
+            <div className={styles.imagePreviews}>
 
-        <div className={styles.inputGroup}>
-          <input
-            type="text"
-            placeholder="Nome do Item"
-            value={nome}
-            onChange={(e) => setNome(e.target.value)}
-            required
-          />
-        </div>
-        <div className={styles.inputGroup}>
-          <textarea
-            placeholder="Descrição"
-            value={descricao}
-            onChange={(e) => setDescricao(e.target.value)}
-            required
-          />
-        </div>
-        <div className={styles.inputGroup}>
-          <input
-            type="text"
-            placeholder="Preço"
-            value={preco} 
-            onChange={handlePriceChange}
-            required
-          />
-        </div>
-        <div className={styles.inputGroup}>
-          <select
-            value={categoria}
-            onChange={(e) => setCategoria(e.target.value)}
-            required
-          >
-            <option value="">Selecione uma categoria</option>
-            <option value="Doces">Doces</option>
-            <option value="Salgados">Salgados</option>
-            <option value="Gelados">Gelados</option>
-            <option value="Fitness">Fitness</option>
-          </select>
-        </div>
-        <div className={styles.inputGroup}>
-          <input
-            type="number"
-            placeholder="Quantidade"
-            value={quantidade}
-            onChange={handleQuantityChange}
-            required
-          />
-        </div>
-        <RoundedButton text="Anunciar" />
-        {error && <p className={styles.error}>{error}</p>}
-      </form>
-    </div>
+              {imagens.slice(1).map((imagem, index) => (
+                <img
+                  key={index}
+                  src={URL.createObjectURL(imagem)}
+                  alt={`Imagem preview ${index + 1}`}
+                  className={styles.imagemPreview} />
+              ))}
+            </div>
+          </div>
+
+          <div className={styles.inputGroup}>
+            <input
+              type="text"
+              placeholder="Nome do Item"
+              value={nome}
+              onChange={(e) => setNome(e.target.value)}
+              required />
+          </div>
+          <div className={styles.inputGroup}>
+            <textarea
+              placeholder="Descrição"
+              value={descricao}
+              onChange={(e) => setDescricao(e.target.value)}
+              required />
+          </div>
+          <div className={styles.inputGroup}>
+            <input
+              type="text"
+              placeholder="Preço"
+              value={preco}
+              onChange={handlePriceChange}
+              required />
+          </div>
+          <div className={styles.inputGroup}>
+            <select
+              value={categoria}
+              onChange={(e) => setCategoria(e.target.value)}
+              required
+            >
+              <option value="">Selecione uma categoria</option>
+              <option value="Doces">Doces</option>
+              <option value="Salgados">Salgados</option>
+              <option value="Gelados">Gelados</option>
+              <option value="Fitness">Fitness</option>
+            </select>
+          </div>
+          <div className={styles.inputGroup}>
+            <input
+              type="number"
+              placeholder="Quantidade"
+              value={quantidade}
+              onChange={handleQuantityChange}
+              required />
+          </div>
+          <RoundedButton text="Anunciar" />
+          {error && <p className={styles.error}>{error}</p>}
+        </form>
+      </div></>
+      </div>
   );
 };
 
