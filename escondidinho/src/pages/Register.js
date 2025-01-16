@@ -6,6 +6,7 @@ import eyeIcon from '../assets/img/eye.png';
 import eyeSlashIcon from '../assets/img/eye-slash.png';
 import RoundedButton from './RoundedButton';
 
+
 const Register = ({ role }) => {
   const [nome, setNome] = useState(''); // Nome do vendedor ou cliente
   const [email, setEmail] = useState('');
@@ -55,7 +56,10 @@ const Register = ({ role }) => {
   };
 
   return (
+    <div className={styles.fundoRegistro}> 
+   
     <div className={styles.container}>
+    
       <div className={styles.logo}>
         <img src={logo} alt="Logo" />
       </div>
@@ -74,8 +78,7 @@ const Register = ({ role }) => {
             borderRadius: '50px',
             backgroundColor: '#f9f9f9',
             height: '50px',
-          }}
-        />
+          }} />
         <input
           type="email"
           id="email"
@@ -84,8 +87,7 @@ const Register = ({ role }) => {
           placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className={styles.input}
-        />
+          className={styles.input} />
         <input
           type="tel"
           id="tel"
@@ -94,8 +96,7 @@ const Register = ({ role }) => {
           placeholder="Tel/Cel"
           value={tel}
           onChange={(e) => setTel(e.target.value)}
-          className={styles.input}
-        />
+          className={styles.input} />
         <div className={styles.passwordContainer}>
           <input
             type={showPassword ? 'text' : 'password'}
@@ -105,14 +106,12 @@ const Register = ({ role }) => {
             placeholder="Senha"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className={styles.input}
-          />
+            className={styles.input} />
           <img
             src={showPassword ? eyeSlashIcon : eyeIcon}
             alt="Toggle visibility"
             className={styles.togglePassword}
-            onClick={() => setShowPassword(!showPassword)}
-          />
+            onClick={() => setShowPassword(!showPassword)} />
         </div>
         <div className={styles.passwordContainer}>
           <input
@@ -123,14 +122,12 @@ const Register = ({ role }) => {
             placeholder="Confirmar Senha"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
-            className={styles.input}
-          />
+            className={styles.input} />
           <img
             src={showConfirmPassword ? eyeSlashIcon : eyeIcon}
             alt="Toggle visibility"
             className={styles.togglePassword}
-            onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-          />
+            onClick={() => setShowConfirmPassword(!showConfirmPassword)} />
         </div>
         <div className={styles.contentBelowPassword}>
           <RoundedButton text="Registrar" />
@@ -138,6 +135,7 @@ const Register = ({ role }) => {
           <RoundedButton text="Voltar para Login" onClick={() => navigate('/login')} />
         </div>
       </form>
+    </div>
     </div>
   );
 };
