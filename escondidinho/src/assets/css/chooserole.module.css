@@ -3,18 +3,23 @@
     align-items: center;
     justify-content: center;
     min-height: 100vh; /* Ocupa a altura total da tela */
-    background-image: url(../img/fundo.png);
+   
   }
+  .logo img {
+    width: 250px;
+    display: block;
+    margin: 0 auto 30px;
+}
   
   .content {
-    background: rgba( 255, 255, 255, 0.45 );
-    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    background: rgb(255, 255, 255);
+
     backdrop-filter: blur( 1.5px );
     -webkit-backdrop-filter: blur( 1.5px );
     border-radius: 10px;
     border: 1px solid rgba( 255, 255, 255, 0.18 );
     border-radius: 15px; /* Bordas arredondadas */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    
     padding: 80px; /* Espaçamento interno */
     text-align: center; /* Centraliza o texto */
     width: 90%; /* Ajuste a largura conforme necessário */
@@ -22,7 +27,7 @@
   }
   
   h2 {
-    font-size: 3rem; /* Tamanho grande do texto */
+    font-size: 1.5em; /* Tamanho grande do texto */
     color: #5B4134; /* Cor que combina com os botões */
     margin-bottom: 30px; /* Espaço abaixo do título */
   }
@@ -30,11 +35,25 @@
   .roleButtons {
     display: flex;
     justify-content: center;
-    gap: 20px; /* Espaço entre os botões */
-    flex-wrap: wrap; /* Permite quebra de linha em telas pequenas */
+    gap: 30px; /* Espaço entre os botões */
+  
   }
   
   .roleButtons button {
     width: 150px; /* Largura fixa para botões */
+    transition: transform 0.3s ease; /* Suaviza a mudança */
+
   }
+
   
+
+.blocos{
+  display: flex;
+  justify-content: center; /* Centraliza os itens no contêiner */
+  gap: 2em; /* Espaçamento entre os itens */
+  margin-bottom: 3em;
+  margin-top: 3.7em;
+  cursor: float;
+}
+
+
