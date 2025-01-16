@@ -1,3 +1,100 @@
-.container{
-  margin: 0 auto;  
-}
+.request-reset-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+  }
+  
+  .request-reset-page * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+  }
+  
+  .request-reset-page .container {
+    background-color: #ffffff;
+    padding: 60px;
+    border-radius: 16px;
+    width: 100%;
+    max-width: 450px;
+    text-align: center;
+    color: black; /* Cor do texto alterada para preto */
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+  }
+  
+  .request-reset-page .logo img {
+    width: 180px;
+    margin-bottom: 30px;
+    /*filter: brightness(0) invert(1);*/
+  }
+  
+  .request-reset-page h2 {
+    font-size: 30px;
+    margin-bottom: 30px;
+    color: black; /* Cor do título alterada para preto */
+  }
+  
+  .request-reset-page .form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%; 
+  }
+  
+  .request-reset-page .input-field {
+    padding: 16px;
+    border-radius: 10px;
+    border: none;
+    font-size: 18px;
+    width: 100%;
+    margin-bottom: 20px;
+    outline: none;
+    transition: 0.3s ease;
+    color: #333;
+  }
+  
+  .request-reset-page .input-field:focus {
+    box-shadow: 0 0 8px rgba(52, 152, 219, 0.5);
+    border-color: #3498db;
+  }
+  
+  .request-reset-page .submit-button {
+    padding: 16px;
+    background-color: #fcacb3;
+    color: black;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: 0.3s ease;
+    width: 100%; 
+  }
+  
+  .request-reset-page .message {
+    font-size: 18px;
+    color: black; /* Cor da mensagem alterada para preto */
+    margin-top: 25px;
+    background-color: rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    border-radius: 8px;
+  }
+  
+  .request-reset-page .container, .request-reset-page .form {
+    animation: fadeIn 1s ease-out;
+  }
+  
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
