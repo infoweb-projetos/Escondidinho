@@ -32,6 +32,33 @@ h2 {
   margin-bottom: 15px;
 }
 
+.placeholderImage {
+  width: 100px;
+  height: 100px;
+  background-color: #f0f0f0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  border: 2px dashed #ccc;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.placeholderImage span {
+  color: #777;
+  font-size: 14px;
+}
+
+/* Estilo para os previews das imagens */
+.imagePreviews {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
 .imagemPreview {
   width: 100px; /* Tamanho reduzido para se adequar ao layout */
   height: 100px;
@@ -83,4 +110,7 @@ button:hover {
   margin-top: 10px;
   font-size: 14px;
   text-align: center;
+}
+.fileInput {
+  display: none;
 }

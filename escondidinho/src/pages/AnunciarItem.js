@@ -8,7 +8,7 @@ const AnunciarItem = () => {
   const [preco, setPreco] = useState('');
   const [categoria, setCategoria] = useState('');
   const [quantidade, setQuantidade] = useState(0);
-  const [imagem, setImagem] = useState(null);
+  const [imagens, setImagens] = useState([]);
   const [imagemPreview, setImagemPreview] = useState(null); 
   const [error, setError] = useState('');
 
@@ -16,12 +16,20 @@ const AnunciarItem = () => {
     const value = parseInt(e.target.value, 10);
     setQuantidade(value >= 0 ? value : 0);
   };
-  
 
   const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    setImagem(file);
-    setImagemPreview(URL.createObjectURL(file)); 
+    const files = e.target.files;
+    if (files) {
+      const newImagens = Array.from(files).filter(file => 
+        !imagens.some(existingImage => existingImage.name === file.name) // Verifica se o arquivo já existe
+      );
+      setImagens(prevImagens => [...prevImagens, ...newImagens]);
+
+      // Definir o preview da primeira nova imagem
+      if (newImagens.length > 0) {
+        setImagemPreview(URL.createObjectURL(newImagens[0])); // Exibe o preview da primeira nova imagem
+      }
+    }
   };
 
   const handlePriceChange = (e) => {
@@ -33,7 +41,6 @@ const AnunciarItem = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Remover o "R$ " antes de enviar ao backend
     const precoNumerico = preco.replace("R$ ", "").replace(",", ".");
 
     const formData = new FormData();
@@ -42,7 +49,7 @@ const AnunciarItem = () => {
     formData.append('preco', precoNumerico);
     formData.append('categoria', categoria);
     formData.append('quantidade', quantidade);
-    if (imagem) formData.append('imagem', imagem);
+    imagens.forEach((imagem) => formData.append('imagens', imagem)); // Adiciona todas as imagens
 
     try {
       const response = await fetch('http://localhost:5000/anunciar', {
@@ -61,7 +68,7 @@ const AnunciarItem = () => {
       setPreco('');
       setCategoria('');
       setQuantidade(0);
-      setImagem(null);
+      setImagens([]);
       setImagemPreview(null);
       alert('Item anunciado com sucesso!');
     } catch (err) {
@@ -74,20 +81,35 @@ const AnunciarItem = () => {
       <h2>Anunciar Item</h2>
       <form onSubmit={handleSubmit} encType="multipart/form-data" className={styles.form}>
         <div className={styles.imageUpload}>
+          <label htmlFor="image-upload" className={styles.placeholderImage}>
+            {imagemPreview ? (
+              <img src={imagemPreview} alt="Preview do Produto" className={styles.imagemPreview} />
+            ) : (
+              <span>Adicionar Imagem</span>
+            )}
+          </label>
           <input
             type="file"
+            id="image-upload"
             onChange={handleImageChange}
             accept="image/*"
+            multiple
+            className={styles.fileInput}
             required
           />
-          {imagemPreview && (
-            <img 
-              src={imagemPreview} 
-              alt="Preview do Produto" 
-              className={styles.imagemPreview}
-            />
-          )}
+          <div className={styles.imagePreviews}>
+            {/* Exibe miniaturas sem o primeiro arquivo de preview */}
+            {imagens.slice(1).map((imagem, index) => (
+              <img 
+                key={index} 
+                src={URL.createObjectURL(imagem)} 
+                alt={`Imagem preview ${index + 1}`} 
+                className={styles.imagemPreview}
+              />
+            ))}
+          </div>
         </div>
+
         <div className={styles.inputGroup}>
           <input
             type="text"
