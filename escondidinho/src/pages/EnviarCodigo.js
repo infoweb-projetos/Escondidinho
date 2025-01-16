@@ -25,18 +25,20 @@ const RequestReset = () => {
       <div className="logo">
         <img src={logo} alt="Logo" />
       </div>
-      <form onSubmit={handleRequestReset}>
+      <form onSubmit={handleRequestReset} className="form">
+        <h2>Redefinir Senha</h2>
         <input
           type="email"
           id="email"
           name="email"
           required
-          placeholder="Email"
+          placeholder="Digite seu email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          className="input-field"
         />
-        <button type="submit">Enviar Código</button>
-        {message && <p>{message}</p>}
+        <button type="submit" className="submit-button">Enviar Código</button>
+        {message && <p className="message">{message}</p>}
       </form>
     </div>
   );

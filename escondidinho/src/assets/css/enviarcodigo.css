@@ -1,3 +1,101 @@
-.container{
-    
-}
+.request-reset-page * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+  }
+  
+  .request-reset-page body {
+    background: #f9f9f9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: #333;
+  }
+  
+  .request-reset-page .container {
+    background-color: #fcacb3;
+    padding: 60px;
+    border-radius: 16px;
+    box-shadow: 0 4px 40px rgba(0, 0, 0, 0.15);
+    width: 100%;
+    max-width: 450px;
+    text-align: center;
+    color: white;
+  }
+  
+  .request-reset-page .logo img {
+    width: 180px;
+    margin-bottom: 30px;
+    filter: brightness(0) invert(1);
+  }
+  
+  .request-reset-page h2 {
+    font-size: 30px;
+    margin-bottom: 30px;
+    color: #fff;
+  }
+  
+  .request-reset-page .form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .request-reset-page .input-field {
+    padding: 16px;
+    border-radius: 10px;
+    border: none;
+    font-size: 18px;
+    width: 100%;
+    margin-bottom: 20px;
+    outline: none;
+    transition: 0.3s ease;
+    color: #333;
+  }
+  
+  .request-reset-page .input-field:focus {
+    box-shadow: 0 0 8px rgba(52, 152, 219, 0.5);
+    border-color: #3498db;
+  }
+  
+  .request-reset-page .submit-button {
+    padding: 16px;
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: 0.3s ease;
+  }
+  
+  .request-reset-page .submit-button:hover {
+    background-color: #9b59b6;
+  }
+  
+  .request-reset-page .message {
+    font-size: 18px;
+    color: #fff;
+    margin-top: 25px;
+    background-color: rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    border-radius: 8px;
+  }
+  
+  .request-reset-page .container, .request-reset-page .form {
+    animation: fadeIn 1s ease-out;
+  }
+  
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  

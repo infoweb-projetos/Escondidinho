@@ -60,7 +60,7 @@ h2 {
 }
 
 .imagemPreview {
-  width: 100px; /* Tamanho reduzido para se adequar ao layout */
+  width: 100px; 
   height: 100px;
   object-fit: cover;
   border-radius: 5px;

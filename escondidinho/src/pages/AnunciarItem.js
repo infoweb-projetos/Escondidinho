@@ -21,13 +21,12 @@ const AnunciarItem = () => {
     const files = e.target.files;
     if (files) {
       const newImagens = Array.from(files).filter(file => 
-        !imagens.some(existingImage => existingImage.name === file.name) // Verifica se o arquivo já existe
+        !imagens.some(existingImage => existingImage.name === file.name) 
       );
       setImagens(prevImagens => [...prevImagens, ...newImagens]);
 
-      // Definir o preview da primeira nova imagem
       if (newImagens.length > 0) {
-        setImagemPreview(URL.createObjectURL(newImagens[0])); // Exibe o preview da primeira nova imagem
+        setImagemPreview(URL.createObjectURL(newImagens[0])); 
       }
     }
   };
@@ -49,7 +48,7 @@ const AnunciarItem = () => {
     formData.append('preco', precoNumerico);
     formData.append('categoria', categoria);
     formData.append('quantidade', quantidade);
-    imagens.forEach((imagem) => formData.append('imagens', imagem)); // Adiciona todas as imagens
+    imagens.forEach((imagem) => formData.append('imagens', imagem));
 
     try {
       const response = await fetch('http://localhost:5000/anunciar', {
@@ -98,7 +97,7 @@ const AnunciarItem = () => {
             required
           />
           <div className={styles.imagePreviews}>
-            {/* Exibe miniaturas sem o primeiro arquivo de preview */}
+            {}
             {imagens.slice(1).map((imagem, index) => (
               <img 
                 key={index} 
